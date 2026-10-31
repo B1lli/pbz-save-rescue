@@ -10,7 +10,7 @@
 
 **Do this, in order:**
 
-1. Get the files onto the user's machine. In Claude Code: `git clone https://github.com/B1lli/pbz-regret-pill ~/.claude/skills/pbz-save-rescue`. In any other agent: clone or download to any directory you can run commands in.
+1. Get the files onto the user's machine. In Claude Code: `git clone https://github.com/B1lli/pbz-save-rescue ~/.claude/skills/pbz-save-rescue`. In any other agent: clone or download to any directory you can run commands in.
 2. **Read `SKILL.md` in full** and follow it from step 0. It is the complete runbook (find save → backup → unpack → scan regrets → ask one question → fix → install → hand over). `$S` in it means the `scripts/` directory of this repo. Do not improvise from this README alone.
 3. Requirements: Python 3.9+ with `pip install cryptography`, and Node.js. On Windows use `python` or `py -3`. Install what is missing yourself.
 4. Safety rules, non-negotiable:
