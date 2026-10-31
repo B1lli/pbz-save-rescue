@@ -2,7 +2,7 @@
 // Usage: node ooz_decode.mjs <oozextract_dir> <jobs.json>
 // jobs.json: [{"in": path, "out": path, "size": uncompressed_size}, ...]
 // <oozextract_dir> holds oozextract.js + oozextract_bg.wasm (oozextract 0.5.7, MIT),
-// installed by setup_oodle.sh; pbzsave.py verifies the wasm SHA-256 before calling this.
+// installed by setup_oodle.py; pbzsave.py verifies the wasm SHA-256 before calling this.
 import fs from 'fs';
 import path from 'path';
 import { pathToFileURL } from 'url';

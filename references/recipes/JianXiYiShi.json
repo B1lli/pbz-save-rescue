@@ -1,0 +1,212 @@
+{
+ "quest": "JianXiYiShi",
+ "format": 1,
+ "note": "来自一次真实的游戏内交任务（交任务前 → 交任务后的存档差异，已人工审查）。奖励：饰品 AC_Drink；交掉金疮草/凝脂叶/止血藤（I_01007/08/09）各 1。",
+ "slot_ops": [
+  [
+   "ladd",
+   [
+    "EventPipeline",
+    "ComponentInfoJson",
+    "PBZ_Xigu_WP-BP_NPCSpawner_C_UAID_BCFCE707895EC6AE02_1304196018",
+    "EventTag"
+   ],
+   null,
+   "xg.营地玉儿.收集药材结束"
+  ],
+  [
+   "ladd",
+   [
+    "EventPipeline",
+    "ComponentInfoJson",
+    "PBZ_Xigu_WP-BP_NPCSpawner_C_UAID_BCFCE707895EC6AE02_1304196018",
+    "EventTag"
+   ],
+   null,
+   "xg.营地玉儿.隐藏药盒"
+  ],
+  [
+   "ldel",
+   [
+    "EventPipeline",
+    "ComponentInfoJson",
+    "PBZ_Xigu_WP-BP_NPCSpawner_C_UAID_BCFCE707895EC6AE02_1304196018",
+    "EventTag"
+   ],
+   "xg.营地玉儿.收集药材可提交",
+   null
+  ],
+  [
+   "ladd",
+   [
+    "EventPipeline",
+    "GlobalTags"
+   ],
+   null,
+   "xg.营地玉儿.收集药材结束"
+  ],
+  [
+   "ladd",
+   [
+    "EventPipeline",
+    "GlobalTags"
+   ],
+   null,
+   "xg.营地玉儿.显示药盒"
+  ],
+  [
+   "ladd",
+   [
+    "EventPipeline",
+    "GlobalTags"
+   ],
+   null,
+   "xg.营地玉儿.隐藏药盒"
+  ],
+  [
+   "set",
+   [
+    "EventPipeline",
+    "ExecuteNodeGuid",
+    "PBZ_Xigu_WP-BP_NPCSpawner_C_UAID_BCFCE707895EC6AE02_1304196018_38F1AF514AF9C871EA8590B19825D0AB"
+   ],
+   null,
+   true
+  ],
+  [
+   "chg",
+   [
+    "Inventory",
+    "InventoryInfos",
+    "I_01009",
+    "CurrentAmount"
+   ],
+   1,
+   0
+  ],
+  [
+   "chg",
+   [
+    "Inventory",
+    "InventoryInfos",
+    "I_01007",
+    "CurrentAmount"
+   ],
+   1,
+   0
+  ],
+  [
+   "chg",
+   [
+    "Inventory",
+    "InventoryInfos",
+    "I_01008",
+    "CurrentAmount"
+   ],
+   1,
+   0
+  ],
+  [
+   "set",
+   [
+    "Inventory",
+    "AccessoryInfos",
+    "AC_Drink"
+   ],
+   null,
+   {
+    "CurrentLevel": 0,
+    "DirtyTime": "2026.11.01-01.26.18",
+    "AcquiredCycle": 0
+   }
+  ],
+  [
+   "chg",
+   [
+    "Narrative",
+    "QuestGameTimes",
+    {
+     "k": "QuestClass",
+     "v": "/Game/PBZstory/PBZQuest/Simple/JianXiYiShi.JianXiYiShi_C"
+    },
+    "GameTime"
+   ],
+   20726,
+   27377
+  ],
+  [
+   "oreplace",
+   [
+    "Narrative",
+    "NarrativeSavedQuests",
+    {
+     "k": "QuestClass",
+     "v": "/Game/PBZstory/PBZQuest/Simple/JianXiYiShi.JianXiYiShi_C"
+    }
+   ],
+   {
+    "QuestClass": "/Game/PBZstory/PBZQuest/Simple/JianXiYiShi.JianXiYiShi_C",
+    "QuestBranches": [
+     {
+      "BranchID": "1",
+      "TasksProgress": [
+       0,
+       0,
+       0
+      ],
+      "BranchType": "EBranchType::BranchCompleted",
+      "DirtyTime": "2026.10.31-01.55.41"
+     },
+     {
+      "BranchID": "2",
+      "BranchType": "EBranchType::BranchActivating",
+      "DirtyTime": "2026.10.31-01.55.41"
+     }
+    ],
+    "QuestCompletion": "EQuestCompletion::QC_Started",
+    "CompletedBranches": [
+     "1"
+    ],
+    "ReachedStateNames": []
+   },
+   {
+    "QuestClass": "/Game/PBZstory/PBZQuest/Simple/JianXiYiShi.JianXiYiShi_C",
+    "QuestBranches": [
+     {
+      "BranchID": "1",
+      "TasksProgress": [
+       0,
+       0,
+       0
+      ],
+      "BranchType": "EBranchType::BranchCompleted",
+      "DirtyTime": "2026.10.31-01.55.41"
+     },
+     {
+      "BranchID": "2",
+      "BranchType": "EBranchType::BranchCompleted",
+      "DirtyTime": "2026.11.01-01.26.27"
+     }
+    ],
+    "QuestCompletion": "EQuestCompletion::QC_Succeded",
+    "CompletedBranches": [
+     "1",
+     "2"
+    ],
+    "ReachedStateNames": []
+   }
+  ]
+ ],
+ "ach_ops": [
+  [
+   "ladd",
+   [
+    "CompletedElements",
+    "__ACH_046_Accessory"
+   ],
+   null,
+   "AC_Drink"
+  ]
+ ],
+ "quest_cn": "见习医师"
+}

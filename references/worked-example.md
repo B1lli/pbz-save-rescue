@@ -57,3 +57,7 @@ NarrativeSavedQuests[JianXiYiShi]: 整条替换（分支 2 BranchCompleted，Com
 ## 5. 交付
 
 用一张剧情语言的改动表，加上安装和验证步骤交给玩家（参照 SKILL.md 的"交付"一节）。
+
+## 后续：做成了配方
+
+这次交任务前后的差异已经保存为 `references/recipes/JianXiYiShi.json`。之后再遇到这个支线失败的玩家，`complete_quest.py --quest JianXiYiShi` 会直接套用它：不用重玩，结果和真实交任务一样（已验证：对这位玩家的最新存档套用配方，得到的各槽位和手工移植的结果逐项相同）。

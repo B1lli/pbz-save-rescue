@@ -6,6 +6,7 @@ choice, ...) from a "before/after" pair of PBZ slot JSONs into target slots.
                 --out-dir OUT [--revert-before RB.json --revert-after RA.json]
                 [--ach-before X --ach-after Y --ach-target Z] [--dry-run]
                 [--keep PATH_SUBSTR ...] [--exclude SUBSTR ...]
+                [--save-recipe references/recipes/<QuestClass>.json --recipe-quest <QuestClass>]
 
 before/after : the same playthrough right before and right after the event (ideally
                consecutive saves with only the event in between).
@@ -17,6 +18,8 @@ ach-*        : __Achievements__.json of before / after / target container.
 Writes patched copies of each target into OUT (same file names) plus OUT/plan.md,
 a human-readable list of every change applied, skipped, or in conflict.
 Nothing is written with --dry-run.
+--save-recipe also stores the reviewed event changes as a reusable "recipe", so
+complete_quest.py can later finish the same quest for players who cannot replay it.
 """
 import argparse, copy, json, os, re, sys
 
@@ -281,6 +284,22 @@ def achievements_fix(target):
             cnt[k] = len(lst)
 
 
+def ser_path(path):
+    return [{"k": p[1], "v": p[2]} if isinstance(p, tuple) else p for p in path]
+
+
+def de_path(path):
+    return tuple(("k", p["k"], p["v"]) if isinstance(p, dict) else p for p in path)
+
+
+def ser_ops(ops):
+    return [[k, ser_path(p), o, n] for k, p, o, n in ops]
+
+
+def de_ops(ops):
+    return [(k, de_path(p), o, n) for k, p, o, n in ops]
+
+
 def load(p):
     return json.load(open(p, encoding="utf-8"))
 
@@ -304,6 +323,8 @@ def main():
                     help="drop event changes whose path or new value contains this substring "
                          "(use for unrelated things the player did during the replay)")
     ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--save-recipe", help="write the event changes as a recipe JSON for complete_quest.py")
+    ap.add_argument("--recipe-quest", help="QuestClass short name the recipe completes, e.g. JianXiYiShi")
     a = ap.parse_args()
 
     fwd, noise = ops_between(load(a.before), load(a.after), a.keep)
@@ -357,6 +378,19 @@ def main():
         if not a.dry_run:
             open(os.path.join(a.out_dir, os.path.basename(a.ach_target)), "w", encoding="utf-8").write(
                 json.dumps(t, ensure_ascii=False, separators=(",", ":")))
+
+    if a.save_recipe:
+        ach_ops = []
+        if a.ach_before and a.ach_after:
+            ach_ops, _ = ops_between(load(a.ach_before), load(a.ach_after), a.keep)
+            ach_ops = [o for o in ach_ops if o[0] not in ("ldel", "del", "odel")
+                       and not (o[0] == "chg" and o[1][:1] == ("Counters",))]
+        rec = {"quest": a.recipe_quest, "format": 1,
+               "note": "event changes recorded from a real in-game completion (before -> after), reviewed",
+               "slot_ops": ser_ops(fwd), "ach_ops": ser_ops(ach_ops)}
+        os.makedirs(os.path.dirname(os.path.abspath(a.save_recipe)), exist_ok=True)
+        open(a.save_recipe, "w", encoding="utf-8").write(json.dumps(rec, ensure_ascii=False, indent=1))
+        print(f"recipe written to {a.save_recipe}")
 
     text = "\n".join(plan)
     if a.dry_run:

@@ -23,6 +23,9 @@ Sub-commands
   backup  SAVEDIR [--to DIR]         zip the whole save folder with a timestamp
   update-key SAV [--source URL]      after a game update: fetch the newest key from SaveSmith,
                                      keep it only if it decrypts SAV (saved to ~/.cache/pbz-save-rescue/key.txt)
+  find                               locate PBZ save folders on this computer (Steam libraries, Proton)
+  install SAVEDIR NEW_SAV            back up SAVEDIR, then copy NEW_SAV in as PBZSaveGame.sav
+                                     (game must be closed; ask the user first)
 """
 import argparse, datetime, glob, hashlib, json, os, shutil, struct, subprocess, sys, tempfile, zipfile, zlib
 
@@ -145,7 +148,7 @@ def find_ooz_dir(explicit=None):
             if hashlib.sha256(wasm).hexdigest() != OOZ_WASM_SHA256:
                 raise PbzError(f"{d}/oozextract_bg.wasm SHA-256 mismatch; refusing to run it")
             return d
-    raise PbzError("Oodle decoder not installed. Run scripts/setup_oodle.sh (needs git + node), "
+    raise PbzError("Oodle decoder not installed. Run scripts/setup_oodle.py (needs network; Node.js to run it), "
                    "or pass --ooz-dir / set PBZ_OOZ_DIR to a folder holding oozextract.js + oozextract_bg.wasm")
 
 
@@ -339,6 +342,76 @@ def cmd_backup(savedir, to=None):
     return dst
 
 
+def _steam_roots():
+    roots = []
+    if sys.platform == "win32":
+        try:
+            import winreg
+            for hive, key, val in ((winreg.HKEY_CURRENT_USER, r"Software\Valve\Steam", "SteamPath"),
+                                   (winreg.HKEY_LOCAL_MACHINE, r"SOFTWARE\WOW6432Node\Valve\Steam", "InstallPath")):
+                try:
+                    with winreg.OpenKey(hive, key) as k:
+                        roots.append(winreg.QueryValueEx(k, val)[0])
+                except OSError:
+                    pass
+        except ImportError:
+            pass
+        roots += [r"C:\Program Files (x86)\Steam", r"C:\Program Files\Steam"]
+    else:
+        roots += [os.path.expanduser(x) for x in ("~/.steam/steam", "~/.local/share/Steam",
+                  "~/.var/app/com.valvesoftware.Steam/.local/share/Steam", "~/Library/Application Support/Steam")]
+    libs = []
+    for r in roots:
+        vdf = os.path.join(r, "steamapps", "libraryfolders.vdf")
+        if os.path.isfile(vdf):
+            import re
+            libs += [m.replace("\\\\", "\\") for m in re.findall(r'"path"\s+"([^"]+)"', open(vdf, encoding="utf-8", errors="ignore").read())]
+        libs.append(r)
+    out = []
+    for l in libs:
+        if os.path.isdir(l) and os.path.normcase(os.path.abspath(l)) not in [os.path.normcase(os.path.abspath(x)) for x in out]:
+            out.append(l)
+    return out
+
+
+def cmd_find():
+    cands = []
+    for lib in _steam_roots():
+        cands += glob.glob(os.path.join(lib, "steamapps", "common", "*", "ProjectPBZ", "Saved", "SaveGames", "**", "PBZSaveGame.sav"), recursive=True)
+        cands += glob.glob(os.path.join(lib, "steamapps", "compatdata", "4115450", "pfx", "**", "PBZSaveGame.sav"), recursive=True)
+    for base in (os.environ.get("LOCALAPPDATA"), os.path.expanduser("~/Documents"), os.path.expanduser("~/Saved Games")):
+        if base:
+            cands += glob.glob(os.path.join(base, "*PBZ*", "**", "PBZSaveGame.sav"), recursive=True)
+    seen, rows = set(), []
+    for c in cands:
+        d = os.path.dirname(os.path.abspath(c))
+        if os.path.basename(d) in ("1RealTime", "2Hourly", "3Daily") or d in seen:
+            continue
+        seen.add(d)
+        rows.append((os.path.getmtime(c), d))
+    if not rows:
+        print("没找到。请让用户在 Steam 里右键游戏 → 管理 → 浏览本地文件，再进入 ProjectPBZ\\Saved\\SaveGames\\Steam\\<一串数字> 文件夹，把路径告诉你。")
+        return []
+    rows.sort(reverse=True)
+    for t, d in rows:
+        print(f"{datetime.datetime.fromtimestamp(t):%Y-%m-%d %H:%M}  {d}")
+    print("（最上面这个最近修改过，通常就是要用的存档文件夹；文件夹名是用户的 SteamID64。）")
+    return [d for _, d in rows]
+
+
+def cmd_install(savedir, new_sav, ooz_dir=None):
+    read_slots(new_sav, ooz_dir)  # refuse to install something the toolkit cannot read back
+    dst = os.path.join(savedir, "PBZSaveGame.sav")
+    if not os.path.isfile(dst):
+        raise PbzError(f"{dst} not found; is {savedir} really the save folder?")
+    if os.path.abspath(new_sav) == os.path.abspath(dst):
+        raise PbzError("NEW_SAV is already the installed file")
+    bk = cmd_backup(savedir)
+    shutil.copyfile(new_sav, dst)
+    print(f"installed {new_sav} -> {dst}")
+    print(f"如需还原：退出游戏，把 {bk} 里的 PBZSaveGame.sav 解压回 {savedir} 即可。")
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--ooz-dir")
@@ -349,6 +422,8 @@ def main():
     p = sp.add_parser("pack"); p.add_argument("orig"); p.add_argument("jsondir"); p.add_argument("out")
     p = sp.add_parser("backup"); p.add_argument("savedir"); p.add_argument("--to")
     p = sp.add_parser("update-key"); p.add_argument("sav"); p.add_argument("--source", help="URL of a file containing the key")
+    sp.add_parser("find")
+    p = sp.add_parser("install"); p.add_argument("savedir"); p.add_argument("new_sav")
     a = ap.parse_args()
     try:
         if a.cmd == "unpack":
@@ -364,6 +439,10 @@ def main():
             cmd_backup(a.savedir, a.to)
         elif a.cmd == "update-key":
             cmd_update_key(a.sav, a.source)
+        elif a.cmd == "find":
+            cmd_find()
+        elif a.cmd == "install":
+            cmd_install(a.savedir, a.new_sav, a.ooz_dir)
     except PbzError as ex:
         sys.exit(f"error: {ex}")
 
