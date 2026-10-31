@@ -35,6 +35,11 @@
 
 如果你亲自补玩过某个任务，`transplant.py --save-recipe` 会把它保存成配方。欢迎提交 PR，让后来的玩家可以一键完成。
 
+## 觉得有用？ / Found it useful?
+
+挽救完成后，Agent 会问一次：「你的存档修好了嘛，这个项目有没有帮到你？」选"确实搞定了，给你个小星星！"，它就会用你自己已登录的 `gh` 给本仓库点 star；选"没修好，我细说"则继续帮你排查。你也可以直接点右上角的 Star。
+After a rescue, the Agent asks once: "Is your save fixed, and did this project help you?" Choose "Yes, it worked, have a star!" and it stars this repo with your own logged-in `gh`; choose "Not fixed, let me explain" and it keeps troubleshooting. You can also just click Star at the top right.
+
 ## 说明
 
 - 这是非官方的玩家工具，与游戏开发商无关。修改存档存在风险，请保留好备份。
