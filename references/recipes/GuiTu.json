@@ -1,0 +1,233 @@
+{
+ "quest": "GuiTu",
+ "format": 1,
+ "note": "event changes recorded from a real in-game completion (before -> after), reviewed",
+ "slot_ops": [
+  [
+   "ladd",
+   [
+    "EventPipeline",
+    "ComponentInfoJson",
+    "PBZ_Zhengdaodaying_WP-BP_NPCSpawner_C_UAID_60CF84DCBBBEC5AE02_1706231588",
+    "EventTag"
+   ],
+   null,
+   "ljc.老根头.消失"
+  ],
+  [
+   "ldel",
+   [
+    "EventPipeline",
+    "ComponentInfoJson",
+    "PBZ_Zhengdaodaying_WP-BP_NPCSpawner_C_UAID_60CF84DCBBBEC5AE02_1706231588",
+    "EventTag"
+   ],
+   "ljc.老根头.同意请求",
+   null
+  ],
+  [
+   "ladd",
+   [
+    "EventPipeline",
+    "ComponentInfoJson",
+    "PBZ_Zhengdaodaying_WP-BP_NPCSpawner_C_UAID_DC567BDB4E5E8F0803_1871096624",
+    "EventTag"
+   ],
+   null,
+   "car.老根头.出现"
+  ],
+  [
+   "set",
+   [
+    "EventPipeline",
+    "ComponentsOwnerActorInfo",
+    "PBZ_Zhengdaodaying_WP-BP_NPCSpawner_C_UAID_60CF84DCBBBEC5AE02_1706231588",
+    "OwnerVisible"
+   ],
+   null,
+   false
+  ],
+  [
+   "chg",
+   [
+    "EventPipeline",
+    "ComponentsOwnerActorInfo",
+    "PBZ_Zhengdaodaying_WP-BP_NPCSpawner_C_UAID_DC567BDB4E5E8F0803_1871096624",
+    "IdleType"
+   ],
+   "Stand",
+   "Special2"
+  ],
+  [
+   "del",
+   [
+    "EventPipeline",
+    "ComponentsOwnerActorInfo",
+    "PBZ_Zhengdaodaying_WP-BP_NPCSpawner_C_UAID_DC567BDB4E5E8F0803_1871096624",
+    "OwnerVisible"
+   ],
+   false,
+   null
+  ],
+  [
+   "ladd",
+   [
+    "EventPipeline",
+    "GlobalTags"
+   ],
+   null,
+   "ljc.老根头.消失"
+  ],
+  [
+   "ladd",
+   [
+    "EventPipeline",
+    "GlobalTags"
+   ],
+   null,
+   "car.老根头.出现"
+  ],
+  [
+   "set",
+   [
+    "EventPipeline",
+    "ExecuteNodeGuid",
+    "B03916554E70CD6D48EE3F8BF28B2B63"
+   ],
+   null,
+   true
+  ],
+  [
+   "set",
+   [
+    "EventPipeline",
+    "ExecuteNodeGuid",
+    "887C4FBB4D842AF2E25A139557DD063F"
+   ],
+   null,
+   true
+  ],
+  [
+   "set",
+   [
+    "EventPipeline",
+    "ExecuteNodeGuid",
+    "PBZ_Zhengdaodaying_WP-BP_NPCSpawner_C_UAID_DC567BDB4E5E8F0803_1871096624_8FA45D104AE76308DB14349F717E43A6"
+   ],
+   null,
+   true
+  ],
+  [
+   "chg",
+   [
+    "Inventory",
+    "InventoryInfos",
+    "I_06010",
+    "CurrentAmount"
+   ],
+   1,
+   0
+  ],
+  [
+   "chg",
+   [
+    "Narrative",
+    "QuestGameTimes",
+    {
+     "k": "QuestClass",
+     "v": "/Game/PBZstory/PBZQuest/Simple/GuiTu.GuiTu_C"
+    },
+    "GameTime"
+   ],
+   61858,
+   61900
+  ],
+  [
+   "oreplace",
+   [
+    "Narrative",
+    "NarrativeSavedQuests",
+    {
+     "k": "QuestClass",
+     "v": "/Game/PBZstory/PBZQuest/Simple/GuiTu.GuiTu_C"
+    }
+   ],
+   {
+    "QuestClass": "/Game/PBZstory/PBZQuest/Simple/GuiTu.GuiTu_C",
+    "QuestBranches": [
+     {
+      "BranchID": "1",
+      "BranchType": "EBranchType::BranchCompleted",
+      "DirtyTime": "2026.10.31-17.07.55"
+     },
+     {
+      "BranchID": "2",
+      "BranchType": "EBranchType::BranchCompleted",
+      "DirtyTime": "2026.11.05-04.56.51"
+     },
+     {
+      "BranchID": "3-A",
+      "BranchType": "EBranchType::BranchCompleted",
+      "DirtyTime": "2026.11.05-05.50.05"
+     },
+     {
+      "BranchID": "4",
+      "BranchType": "EBranchType::BranchActivating",
+      "DirtyTime": "2026.11.05-05.50.05"
+     },
+     {
+      "BranchID": "3-B",
+      "BranchType": "EBranchType::None",
+      "DirtyTime": "0001.01.01-00.00.00"
+     }
+    ],
+    "QuestCompletion": "EQuestCompletion::QC_Started",
+    "CompletedBranches": [
+     "1",
+     "2",
+     "3-A"
+    ],
+    "ReachedStateNames": []
+   },
+   {
+    "QuestClass": "/Game/PBZstory/PBZQuest/Simple/GuiTu.GuiTu_C",
+    "QuestBranches": [
+     {
+      "BranchID": "1",
+      "BranchType": "EBranchType::BranchCompleted",
+      "DirtyTime": "2026.10.31-17.07.55"
+     },
+     {
+      "BranchID": "2",
+      "BranchType": "EBranchType::BranchCompleted",
+      "DirtyTime": "2026.11.05-04.56.51"
+     },
+     {
+      "BranchID": "3-A",
+      "BranchType": "EBranchType::BranchCompleted",
+      "DirtyTime": "2026.11.05-05.50.05"
+     },
+     {
+      "BranchID": "4",
+      "BranchType": "EBranchType::BranchCompleted",
+      "DirtyTime": "2026.11.05-05.51.00"
+     },
+     {
+      "BranchID": "3-B",
+      "BranchType": "EBranchType::None",
+      "DirtyTime": "0001.01.01-00.00.00"
+     }
+    ],
+    "QuestCompletion": "EQuestCompletion::QC_Succeded",
+    "CompletedBranches": [
+     "1",
+     "2",
+     "3-A",
+     "4"
+    ],
+    "ReachedStateNames": []
+   }
+  ]
+ ],
+ "ach_ops": []
+}
