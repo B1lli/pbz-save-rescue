@@ -49,6 +49,25 @@ def generic_complete(rec):
     return changed
 
 
+def check_requirements(target, recipe):
+    """Optional recipe scope checks, evaluated before writing any output.
+
+    Paths use transplant's serialized path format. Unknown checks fail closed.
+    Recipes without requirements retain their existing behavior.
+    """
+    for check in recipe.get("requires", []):
+        path = T.de_path(check["path"])
+        value = T.get(target, path)
+        if check["op"] == "equals":
+            ok = value == check["value"]
+        elif check["op"] == "contains_all":
+            ok = isinstance(value, list) and all(x in value for x in check["value"])
+        else:
+            raise ValueError(f"unknown recipe requirement: {check['op']}")
+        if not ok:
+            raise ValueError(f"recipe does not apply: {T.pstr(path)} ({check['op']})")
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--quest", required=True, help="quest class short name, e.g. JianXiYiShi")
@@ -65,6 +84,12 @@ def main():
     plan = [f"# 直接完成任务：{a.quest}", "", f"- 方式：{'配方（来自真实通关记录）' if recipe else '通用（只改任务状态）'}"]
     if recipe:
         plan.append(f"- 配方：{rp} — {recipe.get('note', '')}")
+        # Preflight every requested slot before creating output or touching achievements.
+        try:
+            for tp in a.target:
+                check_requirements(T.load(tp), recipe)
+        except ValueError as ex:
+            ap.error(f"{tp}: {ex}")
     if not a.dry_run:
         os.makedirs(a.out_dir, exist_ok=True)
 

@@ -32,6 +32,7 @@
 | 任务 | 文件 |
 |---|---|
 | 见习医师 | `references/recipes/JianXiYiShi.json` |
+| 白山秘闻（限定失败状态，见[适用范围](references/recipes/BaiShanMiWen.md)） | `references/recipes/BaiShanMiWen.json` |
 
 如果你亲自补玩过某个任务，`transplant.py --save-recipe` 会把它保存成配方。欢迎提交 PR，让后来的玩家可以一键完成。
 
