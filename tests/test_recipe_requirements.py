@@ -109,5 +109,91 @@ class RecipeTests(unittest.TestCase):
             self.assertFalse(output.exists())
 
 
+class ReviveRecipeTests(unittest.TestCase):
+    """BaiShanMiWenRevive.json：复活剑偶并把任务还原为进行中（撤销错误击杀）。"""
+
+    def setUp(self):
+        self.recipe = T.load(ROOT / 'references/recipes/BaiShanMiWenRevive.json')
+        self.target = {
+            'PBZGameSystem': {'CycleCount': 0, 'HasGameTime': 84747,
+                              'DateTimeString': '2025.01.01-00.00.00'},
+            'Narrative': {'NarrativeSavedQuests': [], 'QuestGameTimes': []},
+            'Inventory': {'AccessoryInfos': {}, 'MainWeaponInfos': {}},
+            'EventPipeline': {'GlobalTags': [], 'ComponentInfoJson': {},
+                              'ComponentsOwnerActorInfo': {}, 'ExecuteNodeGuid': {}},
+            'Player': {'Dust': 7654321}, 'MapSubsystem': {'unrelated': True},
+        }
+        quest_op = next(o for o in T.de_ops(self.recipe['slot_ops']) if o[0] == 'oreplace')
+        qc = quest_op[2]['QuestClass']
+        self.target['Narrative']['NarrativeSavedQuests'] = [copy.deepcopy(quest_op[2])]
+        self.target['Narrative']['QuestGameTimes'] = [{'QuestClass': qc, 'GameTime': 1}]
+        for check in self.recipe['requires']:
+            p = T.de_path(check['path'])
+            T.parent(self.target, p)[p[-1]] = copy.deepcopy(check['value'])
+        # 击杀窗口内其余可清除标记 + 无关内容
+        btt = 'PBZ_Zhengdaodaying_WP-BP_NPCSpawner_C_UAID_60CF84DCBBBEC5AE02_1706554590'
+        tags = self.target['EventPipeline']['GlobalTags']
+        tags += ['zddy.毕桃桃.见到肉身', 'bsmw.乌冷霜.出场', 'bsmw.乌冷霜.出场seq播放',
+                 'bsmw.乌冷霜.消散', 'bsmw.击杀.乌冷霜', 'quest.幻术琵琶.收集背板']
+        self.flow = 'PBZ_Zhengdaodaying_WP-BP_FlowActor_C_UAID_E89C25A754346F6602_1373056726'
+        self.target['EventPipeline']['ComponentInfoJson'][self.flow]['EventTag'].append(
+            'quest.幻术琵琶.收集背板')
+        self.target['EventPipeline']['ComponentsOwnerActorInfo'][btt] = {
+            'IdleType': 'Dead', 'RelatedSeqName': '', 'OwnerTransform': {'killed': True}}
+        nodes = self.target['EventPipeline']['ExecuteNodeGuid']
+        for op in T.de_ops(self.recipe['slot_ops']):
+            if op[0] == 'del' and op[1][0] == 'EventPipeline' and op[1][1] == 'ExecuteNodeGuid':
+                nodes[op[1][2]] = True
+        nodes['unrelated-guid'] = True
+        self.target['Narrative']['NarrativeSavedQuests'].append(
+            {'QuestClass': '/unrelated', 'QuestCompletion': 'untouched'})
+
+    def test_revive_resets_quest_and_revives_puppet(self):
+        original = copy.deepcopy(self.target)
+        C.check_requirements(self.target, self.recipe)
+        p = T.Patcher(self.target, 'synthetic')
+        for op in T.de_ops(self.recipe['slot_ops']):
+            p.apply(op)
+        for key in ('PBZGameSystem', 'Player', 'MapSubsystem'):
+            self.assertEqual(self.target[key], original[key])
+        quests = self.target['Narrative']['NarrativeSavedQuests']
+        self.assertEqual(quests[-1], original['Narrative']['NarrativeSavedQuests'][-1])
+        self.assertEqual(quests[0]['QuestCompletion'], 'EQuestCompletion::QC_Started')
+        branch = next(b for b in quests[0]['QuestBranches'] if b['BranchID'] == '1')
+        self.assertEqual(branch['BranchType'], 'EBranchType::BranchActivating')
+        # 全局标签：失败/死亡/乌冷霜/见到肉身 全部清除，无关标签保留
+        tags = self.target['EventPipeline']['GlobalTags']
+        for op in T.de_ops(self.recipe['slot_ops']):
+            if op[0] == 'ldel' and op[1] == ['EventPipeline', 'GlobalTags']:
+                self.assertNotIn(op[2], tags)
+        self.assertIn('quest.幻术琵琶.收集背板', tags)
+        # 组件标签：失败标记清除，无关标签保留
+        comp_tags = self.target['EventPipeline']['ComponentInfoJson'][self.flow]['EventTag']
+        self.assertNotIn('bsmw.剑偶.死亡无任务', comp_tags)
+        self.assertIn('quest.幻术琵琶.收集背板', comp_tags)
+        # 毕桃桃 NPC 复原
+        btt = self.target['EventPipeline']['ComponentsOwnerActorInfo'][
+            'PBZ_Zhengdaodaying_WP-BP_NPCSpawner_C_UAID_60CF84DCBBBEC5AE02_1706554590']
+        self.assertEqual(btt['IdleType'], 'Crouch')
+        self.assertNotIn('killed', btt['OwnerTransform'])
+        # 流程节点全部清除，无关节点保留
+        nodes = self.target['EventPipeline']['ExecuteNodeGuid']
+        self.assertEqual(list(nodes), ['unrelated-guid'])
+        # 任务时间按脚本约定改为目标存档当前游戏时长
+        self.assertEqual(self.target['Narrative']['QuestGameTimes'][0]['GameTime'], 84747)
+        # 已复活的状态不再满足"失败态"前置条件（防重复应用）
+        with self.assertRaises(ValueError):
+            C.check_requirements(self.target, self.recipe)
+
+    def test_rejects_each_missing_requirement(self):
+        for check in self.recipe['requires']:
+            with self.subTest(path=check['path']):
+                target = copy.deepcopy(self.target)
+                p = T.de_path(check['path'])
+                T.parent(target, p)[p[-1]] = None
+                with self.assertRaises(ValueError):
+                    C.check_requirements(target, self.recipe)
+
+
 if __name__ == '__main__':
     unittest.main()

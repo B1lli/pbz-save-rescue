@@ -1,0 +1,135 @@
+{
+ "quest": "BaiShanMiWen",
+ "quest_cn": "白山秘闻·复活剑偶（撤销错误击杀）",
+ "format": 1,
+ "note": "来自玩家真实挽救记录并经游戏内验证：廿一号·剑偶「玉璧」被提前击杀、任务失败后，不重玩、不回档，在最新存档上复活剑偶并把白山密闻还原为进行中（QC_Started），玩家可按正确顺序重做（先找毕桃桃的肉身再打剑偶）。同时把乌冷霜还原为未出场状态。其余任务与收集进度不受影响；成就文件不做任何改动。适用范围与限制见 BaiShanMiWenRevive.md。使用 --recipe references/recipes/BaiShanMiWenRevive.json 指定本配方。",
+ "requires": [
+  {
+   "path": ["PBZGameSystem", "CycleCount"],
+   "op": "equals",
+   "value": 0
+  },
+  {
+   "path": ["Narrative", "NarrativeSavedQuests", {"k": "QuestClass", "v": "/Game/PBZstory/PBZQuest/Simple/BaiShanMiWen.BaiShanMiWen_C"}, "QuestCompletion"],
+   "op": "equals",
+   "value": "EQuestCompletion::QC_Failed"
+  },
+  {
+   "path": ["Narrative", "NarrativeSavedQuests", {"k": "QuestClass", "v": "/Game/PBZstory/PBZQuest/Simple/BaiShanMiWen.BaiShanMiWen_C"}, "QuestBranches", {"k": "BranchID", "v": "1"}, "BranchType"],
+   "op": "equals",
+   "value": "EBranchType::BranchActivating"
+  },
+  {
+   "path": ["Narrative", "NarrativeSavedQuests", {"k": "QuestClass", "v": "/Game/PBZstory/PBZQuest/Simple/BaiShanMiWen.BaiShanMiWen_C"}, "QuestBranches", {"k": "BranchID", "v": "2"}, "BranchType"],
+   "op": "equals",
+   "value": "EBranchType::None"
+  },
+  {
+   "path": ["Narrative", "NarrativeSavedQuests", {"k": "QuestClass", "v": "/Game/PBZstory/PBZQuest/Simple/BaiShanMiWen.BaiShanMiWen_C"}, "QuestBranches", {"k": "BranchID", "v": "PBZQuestBranch_4"}, "BranchType"],
+   "op": "equals",
+   "value": "EBranchType::None"
+  },
+  {
+   "path": ["Narrative", "NarrativeSavedQuests", {"k": "QuestClass", "v": "/Game/PBZstory/PBZQuest/Simple/BaiShanMiWen.BaiShanMiWen_C"}, "QuestBranches", {"k": "BranchID", "v": "3"}, "BranchType"],
+   "op": "equals",
+   "value": "EBranchType::None"
+  },
+  {
+   "path": ["Narrative", "NarrativeSavedQuests", {"k": "QuestClass", "v": "/Game/PBZstory/PBZQuest/Simple/BaiShanMiWen.BaiShanMiWen_C"}, "QuestBranches", {"k": "BranchID", "v": "S1"}, "BranchType"],
+   "op": "equals",
+   "value": "EBranchType::BranchCompleted"
+  },
+  {
+   "path": ["EventPipeline", "GlobalTags"],
+   "op": "contains_all",
+   "value": [
+    "bsmw.剑偶.死亡",
+    "bsmw.剑偶.死亡无任务",
+    "bsmw.毕桃桃.提前死亡",
+    "zddy.剑偶玉璧.击杀成就计数"
+   ]
+  },
+  {
+   "path": ["EventPipeline", "ComponentInfoJson", "PBZ_Zhengdaodaying_WP-BP_FlowActor_C_UAID_E89C25A754346F6602_1373056726", "EventTag"],
+   "op": "contains_all",
+   "value": [
+    "bsmw.剑偶.死亡无任务",
+    "bsmw.毕桃桃.提前死亡"
+   ]
+  },
+  {
+   "path": ["EventPipeline", "ComponentsOwnerActorInfo", "PBZ_Zhengdaodaying_WP-BP_NPCSpawner_C_UAID_60CF84DCBBBEC5AE02_1706554590", "IdleType"],
+   "op": "equals",
+   "value": "Dead"
+  },
+  {
+   "path": ["EventPipeline", "ComponentsOwnerActorInfo", "PBZ_Zhengdaodaying_WP-BP_NPCSpawner_C_UAID_60CF84DCBBBEC5AE02_1706554590", "RelatedSeqName"],
+   "op": "equals",
+   "value": ""
+  }
+ ],
+ "slot_ops": [
+  ["ldel", ["EventPipeline", "GlobalTags"], "bsmw.剑偶.死亡", null],
+  ["ldel", ["EventPipeline", "GlobalTags"], "bsmw.剑偶.死亡无任务", null],
+  ["ldel", ["EventPipeline", "GlobalTags"], "bsmw.毕桃桃.提前死亡", null],
+  ["ldel", ["EventPipeline", "GlobalTags"], "zddy.剑偶玉璧.击杀成就计数", null],
+  ["ldel", ["EventPipeline", "GlobalTags"], "zddy.毕桃桃.见到肉身", null],
+  ["ldel", ["EventPipeline", "GlobalTags"], "bsmw.乌冷霜.出场", null],
+  ["ldel", ["EventPipeline", "GlobalTags"], "bsmw.乌冷霜.出场seq播放", null],
+  ["ldel", ["EventPipeline", "GlobalTags"], "bsmw.乌冷霜.消散", null],
+  ["ldel", ["EventPipeline", "GlobalTags"], "bsmw.击杀.乌冷霜", null],
+  ["ldel", ["EventPipeline", "ComponentInfoJson", "PBZ_Zhengdaodaying_WP-BP_FlowActor_C_UAID_E89C25A754346F6602_1373056726", "EventTag"], "bsmw.剑偶.死亡无任务", null],
+  ["ldel", ["EventPipeline", "ComponentInfoJson", "PBZ_Zhengdaodaying_WP-BP_FlowActor_C_UAID_E89C25A754346F6602_1373056726", "EventTag"], "bsmw.毕桃桃.提前死亡", null],
+  ["ldel", ["EventPipeline", "ComponentInfoJson", "PBZ_Zhengdaodaying_WP-BP_FlowActor_C_UAID_E89C25A754346F6602_1373056726", "EventTag"], "zddy.剑偶玉璧.击杀成就计数", null],
+  ["ldel", ["EventPipeline", "ComponentInfoJson", "PBZ_Zhengdaodaying_WP-BP_FlowActor_C_UAID_E89C25A754346B4A02_1324845845", "EventTag"], "bsmw.乌冷霜.出场", null],
+  ["ldel", ["EventPipeline", "ComponentInfoJson", "PBZ_Zhengdaodaying_WP-BP_FlowActor_C_UAID_E89C25A754346B4A02_1324845845", "EventTag"], "bsmw.乌冷霜.出场seq播放", null],
+  ["ldel", ["EventPipeline", "ComponentInfoJson", "PBZ_Zhengdaodaying_WP-BP_FlowActor_C_UAID_E89C25A75434F9CA02_1624396199", "EventTag"], "bsmw.乌冷霜.消散", null],
+  ["ldel", ["EventPipeline", "ComponentInfoJson", "PBZ_Zhengdaodaying_WP-BP_NPCSpawner_C_UAID_60CF84DCBBBEC5AE02_1706554590", "EventTag"], "zddy.毕桃桃.见到肉身", null],
+  ["chg", ["EventPipeline", "ComponentsOwnerActorInfo", "PBZ_Zhengdaodaying_WP-BP_NPCSpawner_C_UAID_60CF84DCBBBEC5AE02_1706554590", "IdleType"], "Dead", "Crouch"],
+  ["chg", ["EventPipeline", "ComponentsOwnerActorInfo", "PBZ_Zhengdaodaying_WP-BP_NPCSpawner_C_UAID_60CF84DCBBBEC5AE02_1706554590", "OwnerTransform"], {"Location": {"X": 56220.1212, "Y": 67993.0714, "Z": 14130.7888}, "Rotation": {"Yaw": -45.690162, "Pitch": 0, "Roll": 0}}, {"Location": {"X": 56130.6112, "Y": 68054.3098, "Z": 14130.7888}, "Rotation": {"Yaw": 0, "Pitch": 0, "Roll": 0}}],
+  ["del", ["EventPipeline", "ExecuteNodeGuid", "PBZ_Zhengdaodaying_WP-BP_FlowActor_C_UAID_E89C25A754346F6602_1373056726_FF872DEF4F8B6638BA5E2BB8B1CC01D6"], null, null],
+  ["del", ["EventPipeline", "ExecuteNodeGuid", "PBZ_Zhengdaodaying_WP-BP_FlowActor_C_UAID_E89C25A754346F6602_1373057727_46E13E4846944EF5D6B9F5B0ED10D424"], null, null],
+  ["del", ["EventPipeline", "ExecuteNodeGuid", "PBZ_Zhengdaodaying_WP-BP_FlowActor_C_UAID_E89C25A754346B4A02_1324845845_19CE9F7A49D5E805DAD763AEE2153540"], null, null],
+  ["del", ["EventPipeline", "ExecuteNodeGuid", "PBZ_Zhengdaodaying_WP-BP_FlowActor_C_UAID_E89C25A75434F9CA02_1624396199_3CCAA82C447EAA2AEC2FC29A1F5F41AF"], null, null],
+  ["del", ["EventPipeline", "ExecuteNodeGuid", "PBZ_Zhengdaodaying_WP-BP_FlowActor_C_UAID_E89C25A75434F9CA02_1624396199_79AA8BDE4690FC09250A79968BC82DC2"], null, null],
+  ["del", ["EventPipeline", "ExecuteNodeGuid", "047D071B4D4FCD141A70F88E70584D84"], null, null],
+  ["del", ["EventPipeline", "ExecuteNodeGuid", "14B859874312EC077D86BFB0D9732C36"], null, null],
+  ["del", ["EventPipeline", "ExecuteNodeGuid", "3D5708B44245AA340F68739387DB5A13"], null, null],
+  ["del", ["EventPipeline", "ExecuteNodeGuid", "4D892B3C4E7782A55E56C0B50D6168C6"], null, null],
+  ["del", ["EventPipeline", "ExecuteNodeGuid", "7D84B6C442D008709A8D848483D6BE9D"], null, null],
+  ["del", ["EventPipeline", "ExecuteNodeGuid", "C3723C614A411BC91084BDB2BCA40F01"], null, null],
+  ["del", ["EventPipeline", "ExecuteNodeGuid", "F277FABD461E495565CFC99D682A758E"], null, null],
+  ["del", ["EventPipeline", "ExecuteNodeGuid", "F48A96DE493A2CD7B47C22ABBEAC97DA"], null, null],
+  ["del", ["EventPipeline", "ExecuteNodeGuid", "_162FFB8B41DDCD4930F14B9DC4A99635"], null, null],
+  ["del", ["EventPipeline", "ExecuteNodeGuid", "_4EB2CAE347AE7DDF01B21496F3032BEE"], null, null],
+  ["del", ["EventPipeline", "ExecuteNodeGuid", "_5C6A08EA4B7A60B4FD18A5BA5C25A7F5"], null, null],
+  ["del", ["EventPipeline", "ExecuteNodeGuid", "_E37C08A94EC48D4DCCBA1FA61FD7D22A"], null, null],
+  ["chg", ["Narrative", "QuestGameTimes", {"k": "QuestClass", "v": "/Game/PBZstory/PBZQuest/Simple/BaiShanMiWen.BaiShanMiWen_C"}, "GameTime"], 79117, null],
+  ["oreplace", ["Narrative", "NarrativeSavedQuests", {"k": "QuestClass", "v": "/Game/PBZstory/PBZQuest/Simple/BaiShanMiWen.BaiShanMiWen_C"}], {
+   "QuestClass": "/Game/PBZstory/PBZQuest/Simple/BaiShanMiWen.BaiShanMiWen_C",
+   "QuestBranches": [
+    {"BranchID": "1", "BranchType": "EBranchType::BranchActivating", "DirtyTime": "2026.10.30-17.08.26"},
+    {"BranchID": "2", "BranchType": "EBranchType::None", "DirtyTime": "0001.01.01-00.00.00"},
+    {"BranchID": "PBZQuestBranch_4", "BranchType": "EBranchType::None", "DirtyTime": "0001.01.01-00.00.00"},
+    {"BranchID": "3", "BranchType": "EBranchType::None", "DirtyTime": "0001.01.01-00.00.00"},
+    {"BranchID": "S1", "BranchType": "EBranchType::BranchCompleted", "DirtyTime": "2026.10.30-17.08.26"}
+   ],
+   "QuestCompletion": "EQuestCompletion::QC_Failed",
+   "CompletedBranches": ["S1"],
+   "ReachedStateNames": []
+  }, {
+   "QuestClass": "/Game/PBZstory/PBZQuest/Simple/BaiShanMiWen.BaiShanMiWen_C",
+   "QuestBranches": [
+    {"BranchID": "1", "BranchType": "EBranchType::BranchActivating", "DirtyTime": "2026.11.02-17.23.32"},
+    {"BranchID": "2", "BranchType": "EBranchType::None", "DirtyTime": "0001.01.01-00.00.00"},
+    {"BranchID": "PBZQuestBranch_4", "BranchType": "EBranchType::None", "DirtyTime": "0001.01.01-00.00.00"},
+    {"BranchID": "3", "BranchType": "EBranchType::None", "DirtyTime": "0001.01.01-00.00.00"},
+    {"BranchID": "S1", "BranchType": "EBranchType::BranchCompleted", "DirtyTime": "2026.11.02-17.23.32"}
+   ],
+   "QuestCompletion": "EQuestCompletion::QC_Started",
+   "CompletedBranches": ["S1"],
+   "ReachedStateNames": []
+  }]
+ ],
+ "ach_ops": []
+}
