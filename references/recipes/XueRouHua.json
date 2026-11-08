@@ -1,0 +1,23 @@
+{
+ "quest": "XueRouHua",
+ "format": 1,
+ "note": "血肉之花断交付的真实修复记录（2026-11-08，游戏内完成验证）。病根不在任务账本：飞贼营地里两个 NPC 物件被设为不可见 —— 「营地玉儿」（XSSL_XiaoHuLu 小葫芦待机）与被救飞贼归队并排站在 (-70672,156206)/(-71063,156156)，相距约 400 单位，二者 OwnerVisible 均为 false。打开后进营地即可交付双生血肉花，她交还单独的白花（红花仍在包内），随后传送庞镇玉儿家见爹自动进好结局（过场为爹活），游戏结算给饰品 AC_RandomDrink。任务账本无需改动：交付由游戏自己写入 S2 BranchCompleted 与 xg.玉儿.交出/收下…花。",
+ "requires": [
+  {
+   "op": "equals",
+   "path": ["Narrative", "NarrativeSavedQuests", {"k": "QuestClass", "v": "/Game/PBZstory/PBZQuest/Branch/XueRouHua.XueRouHua_C"}, "QuestBranches", {"k": "BranchID", "v": "S2"}, "BranchType"],
+   "value": "EBranchType::BranchActivating"
+  },
+  {
+   "op": "contains_all",
+   "path": ["EventPipeline", "GlobalTags"],
+   "value": ["fjzl.营地玉儿.到达营地"]
+  }
+ ],
+ "slot_ops": [
+  ["chg", ["EventPipeline", "ComponentsOwnerActorInfo", "PBZ_Fujizhilin_WP-BP_NPCSpawner_C_UAID_BCFCE706288DC5AE02_1084126799", "OwnerVisible"], false, true],
+  ["chg", ["EventPipeline", "ComponentsOwnerActorInfo", "PBZ_Fujizhilin_WP-BP_NPCSpawner_C_UAID_60CF848A6677DFBD02_1141928986", "OwnerVisible"], false, true]
+ ],
+ "ach_ops": [],
+ "quest_cn": "血肉之花"
+}
