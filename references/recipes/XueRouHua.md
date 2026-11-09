@@ -73,3 +73,26 @@ python3 -I scripts/complete_quest.py --quest XueRouHua \
 - 只用一条任务、一位玩家、一个版本验证过；其他失败路线、其他版本、后续周目未验证。
 - 若目标存档里这两个键名不同（子关卡前缀差异），操作会被静默 `skip`；请先用解包结果核对整键，或按 UAID 尾号匹配。
 - 不提交原始存档、完整槽位、Steam ID 或本地路径。
+
+## 收尾：交付已经完成，地图上却还挂着这一步的图标
+
+症状出现在“修复之后再进游戏”的存档上：交付、见爹、好结局都正常，但庞镇地图上仍挂着一条「血肉之花 · 如果到达了庞镇，就回来接玉儿回家吧」，底部提示“取消追踪”。点掉追踪后图标依然在。
+
+取证结论（当时那份存档）：
+
+- `Narrative`：`TrackedBranchID = S1`、`S1` 为 `EBranchType::BranchActivating`，而交付用的 `S2` 已是 `BranchCompleted`。
+- 交付成功的那一刻，游戏立刻激活了下一环 `S1` 并设为当前追踪：`S1` 与 `S2` 的 `DirtyTime` 完全相同（`2026.11.08-15.20.59`）。
+- 点“取消追踪”并保存后（`TrackedQuestPath` 变空、`TrackedBranchID = None`、`ManualTrackingOptOut = true`），**图标仍在**。
+- `MapSubsystem` 各子节（XiGu / FuJiZhiLin / LuJiaCun / PangZhen / HouJie / ZhengDaoDaYing 等）里搜任务名：0 命中；全档除 `Narrative` 外搜 `XueRouHua`：也是 0 命中。
+
+也就是说，这个图标是运行时按“该任务仍有 `BranchActivating` 分支”画出来的，不是地图数据，所以改地图、清追踪都没有用。
+
+处理方式（只对“这一步已经无法再走”的档使用）：把 `S1` 置为 `EBranchType::BranchCompleted`、`CompletedBranches` 追加 `"S1"`、`QuestCompletion` 置 `EQuestCompletion::QC_Succeded`，其余一字不动；只改已经交付过的槽位，交付前的历史槽位保持原样以便回退。
+
+实测结果：装回后进游戏，图标消失、任务列表显示「血肉之花（已完成）」；随后游戏自行存盘，解包复核 `QC_Succeded` 与 `CompletedBranches` 含 `S1` 均未被游戏重算回去。
+
+注意事项：
+
+- 只有当该分支的触发点确实已经耗尽（补玩也走不到）时才这样处理；仍能走通的步骤应该让玩家自己在游戏里完成，不要替他判完成。
+- 改档不会补发成就。「杏林有继」这类成就依赖游戏内条件，账本里写成完成也不会触发。
+- `dhs.决战前Npc.血肉花` 这类后续剧情 NPC 是否会因任务被判完成而不再出场，当时未验证，无法给出结论。
