@@ -1,0 +1,179 @@
+{
+  "kind": "replay_case_evidence",
+  "format": 1,
+  "executable_recipe": false,
+  "scope": {
+    "players": 1,
+    "cycle": 0,
+    "package_version": "EPackageVersion::SonyVersion",
+    "game_build_version": null,
+    "package_version_note": "Raw save enum, not a game build number or independently verified platform",
+    "cross_player_validation": false
+  },
+  "mu_xiaokui": {
+    "validation": {
+      "replay_user_confirmed": true,
+      "reward_saved": true,
+      "merged_main_user_confirmed": true
+    },
+    "replay_before": {
+      "main_quest": {
+        "class": "/Game/PBZstory/PBZQuest/Main/MainCh1-ShiXinCun.MainCh1-ShiXinCun_C",
+        "completion": "EQuestCompletion::QC_Started",
+        "branches": {
+          "1": "EBranchType::BranchCompleted",
+          "2": "EBranchType::BranchCompleted",
+          "3": "EBranchType::BranchActivating",
+          "4": "EBranchType::None",
+          "5": "EBranchType::None",
+          "S1": "EBranchType::BranchCompleted"
+        }
+      },
+      "ribbon_quest": {
+        "class": "/Game/PBZstory/PBZQuest/Collect/ShaoZhu.ShaoZhu_C",
+        "completion": "EQuestCompletion::QC_Succeded",
+        "branches": {
+          "1": "EBranchType::BranchCompleted"
+        }
+      }
+    },
+    "replay_after": {
+      "main_quest": {
+        "class": "/Game/PBZstory/PBZQuest/Main/MainCh1-ShiXinCun.MainCh1-ShiXinCun_C",
+        "completion": "EQuestCompletion::QC_Started",
+        "branches": {
+          "1": "EBranchType::BranchCompleted",
+          "2": "EBranchType::BranchCompleted",
+          "3": "EBranchType::BranchCompleted",
+          "4": "EBranchType::BranchActivating",
+          "5": "EBranchType::None",
+          "S1": "EBranchType::BranchCompleted"
+        }
+      }
+    },
+    "ribbon_tags": [
+      "ljc.沐小葵.获得丝带1",
+      "ljc.沐小葵.获得丝带2",
+      "ljc.沐小葵.获得丝带3",
+      "ljc.沐小葵.获得丝带4",
+      "ljc.沐小葵.获得丝带5"
+    ],
+    "keep_tags": [
+      "ljc.沐小葵.满足额外剧情条件",
+      "ljc.梦差密室.开始电梯下降",
+      "ljc.梦差密室.完成电梯下降",
+      "ljc.梦差密室.电梯动"
+    ],
+    "removed_tags_in_successful_replay_setup": [
+      "ljc.沐小葵.沐小葵出场镜头开始",
+      "hp.击杀.沐小葵",
+      "ljc.沐小葵.血量降低到25",
+      "hp.击杀.沐小葵二阶段",
+      "ljc.沐小葵.隐藏少主船只",
+      "ljc.沐小葵.电梯垮塌可被激活",
+      "ljc.沐小葵.显示乱莺",
+      "ljc.沐小葵.战斗结束",
+      "ljc.沐小葵.显示湖边道具",
+      "ljc.梦差密室.电梯损坏"
+    ],
+    "cleared_named_execution_nodes": [
+      "PBZ_Zhengdaodaying_WP-BP_FlowActor_C_UAID_E89C25A75434854402_1102432945_45E7FC774A947B74A54E83A880915116",
+      "PBZ_Zhengdaodaying_WP-BP_FlowActor_C_UAID_E89C25A75434854402_1102470946_E3292A374B2B06542E4F10A5A0BB5D40"
+    ],
+    "made_visible_actors": [
+      "PBZ_Zhengdaodaying_WP-BP_NPCSpawner_C_UAID_BCFCE7B89673D4CF02_1971479597",
+      "PBZ_Zhengdaodaying_WP-BP_NPCSpawner_C_UAID_BCFCE706287566FD02_1580228825",
+      "PBZ_Zhengdaodaying_WP-BP_FloatingBoat_C_UAID_74563C6BC2BDC2BD02_2143659732"
+    ],
+    "reset_ai_owner_records": [
+      "PBZ_Zhengdaodaying_WP-BP_AISpawner_C_UAID_E89C25A75434004502_1084590648",
+      "PBZ_Zhengdaodaying_WP-BP_AISpawner_C_UAID_E89C25A75434197502_1369350133"
+    ],
+    "ai_persistence_operation": {
+      "owner_cache": "remove the two named owner records",
+      "spawner_save_data": {
+        "IsAlive": true
+      },
+      "applicability": "Only the observed Mu encounter; not a general boss-group recipe"
+    },
+    "observed_rewards": {
+      "main_weapon": "YuuBlade",
+      "additional_item_id_name_unverified": "TU_02002"
+    },
+    "additional_success_tags": [
+      "ljc.沐小葵.显示船上小葵",
+      "ljc.沐小葵.玉妖铁鬼死亡",
+      "ljc.沐小葵.最终形态击杀"
+    ],
+    "keep_main_quest_completed": true,
+    "do_not_duplicate_item": "K_05002"
+  },
+  "mo_jiao_zhi_nv": {
+    "validation": {
+      "replay_user_confirmed": true,
+      "reward_saved": true,
+      "merged_main_roundtrip_verified": true,
+      "merged_main_user_confirmed": false
+    },
+    "successful_replay_strategy": "Complete real world before both encounters, current loadout, and observed spared-woman result; no wholesale IsAlive override on the master group",
+    "spared_before": {
+      "class": "/Game/PBZstory/PBZQuest/Simple/MoJiaoZhiNv.MoJiaoZhiNv_C",
+      "completion": "EQuestCompletion::QC_Started",
+      "branches": {
+        "S1": "EBranchType::None",
+        "1": "EBranchType::BranchActivating"
+      }
+    },
+    "completed_after": {
+      "class": "/Game/PBZstory/PBZQuest/Simple/MoJiaoZhiNv.MoJiaoZhiNv_C",
+      "completion": "EQuestCompletion::QC_Succeded",
+      "branches": {
+        "S1": "EBranchType::None",
+        "1": "EBranchType::BranchCompleted"
+      }
+    },
+    "spared_route_tag": "zddy.红衣女剑客.荡绳离开",
+    "failed_route_tag_removed_from_main": "zddy.击杀.红衣女剑客",
+    "master_spawner_group_identifier": "0A6230820DE85F4502",
+    "master_runtime_layer": "/Game/DataLayers/T01_FirstStage_WP/202405DemoVersion/MainGameFlow/DaYingJianZhen_P2.DaYingJianZhen_P2",
+    "actors": {
+      "1704387576": "PBZ_Zhengdaodaying_WP-BP_NPCSpawner_C_UAID_60CF84DCBBBEC5AE02_1704387576",
+      "1785669150": "PBZ_Zhengdaodaying_WPBP_AISpawner_C_UAID_0A6230820DE8996802_1785669150",
+      "1744213165": "PBZ_Zhengdaodaying_WP-BP_FlowActor_C_UAID_E89C25A75434C17102_1744213165",
+      "1523961129": "PBZ_Zhengdaodaying_WP-BP_FlowActor_ForceSetTag_C_UAID_E89C25A754343D7902_1523961129",
+      "1145877551": "PBZ_Zhengdaodaying_WP-BP_FlowActor_C_UAID_74563CC57EE2FD3B02_1145877551",
+      "1145930585": "PBZ_Zhengdaodaying_WP-BP_FlowActor_C_UAID_74563CC57EE2FD3B02_1145930585",
+      "1133737136": "PBZ_Zhengdaodaying_WP-BP_FlowInteractActor_Character_C_UAID_E89C25A75434B57102_1133737136",
+      "2146454755": "PBZ_Zhengdaodaying_WP-BP_FlowInteractActor_Character_C_UAID_E89C25A754347E4D02_2146454755",
+      "1303434943": "PBZ_Zhengdaodaying_WP-BP_FlowInteract_MemoryFlower_C_UAID_E89C25A754344A4D02_1303434943",
+      "1173034371": "PBZ_Zhengdaodaying_WP-BP_FlowInteract_MemoryFlower_C_UAID_E89C25A75434A47102_1173034371",
+      "1145911571": "PBZ_Zhengdaodaying_WP-MelodiousBell_UAID_74563CC57EE2FD3B02_1145911571"
+    },
+    "actor_identifier_note": "Observed keys across ComponentsOwnerActorInfo, SpawnerSaveData and LevelActorManager in before/after snapshots. Resolve the identifier separately in each section; do not assume identical full key formatting across systems.",
+    "observed_rewards": {
+      "accessory": "AC_LowShachi",
+      "woman_memory_flower": "F_03008",
+      "pair_collection_reward": "FA_0310"
+    },
+    "already_owned_rewards_preserved": [
+      "F_03001",
+      "K_03004",
+      "JianKeZhaoJiLing"
+    ],
+    "additional_success_tags": [
+      "zddy.七星剑阵记忆之花.0",
+      "dhs.决战前Npc.魔教之女"
+    ],
+    "memory_flower_destroyed_field": "HasDestory",
+    "failed_local_reset_observations": [
+      "Forcing all 11 master-group spawners alive produced overlapping phases and repeated phase two",
+      "Restoring only those records plus corpse/flower/bell fields produced an empty arena"
+    ],
+    "single_root_cause_identified": false
+  },
+  "achievement_observation": {
+    "new_achievement_slot_diff": false,
+    "steam_unlock_claimed": false
+  },
+  "privacy": "No full slots, save containers, personal identifiers, raw play timestamps, local paths or account sync queues"
+}
