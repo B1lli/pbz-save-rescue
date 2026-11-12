@@ -1,0 +1,150 @@
+{
+ "quest": "WuXiangWang",
+ "format": 1,
+ "note": "来自一次真实的游戏内交信（交信前 → 交信后，已人工审查）。交付周平子的遗书给雨玲：任务两条分支完成、写剧情标签 ddsd.周平子.交付遗书、雨玲的状态切成交付后并倒地、交信对话节点标记为已播放；奖励饰品 AC_UltimateBreak（绝技护符）。注意：本任务没有成就，ach_ops 为空。",
+ "quest_cn": "勿相忘",
+ "slot_ops": [
+  [
+   "ldel",
+   [
+    "MapSubsystem",
+    "EndedLockObjGuids"
+   ],
+   "PBZ_Pangzhen_WP-BP_SingleDoor_Poverty_C_UAID_60CF848217CA26FA02_1323646252",
+   null
+  ],
+  [
+   "ladd",
+   [
+    "EventPipeline",
+    "ComponentInfoJson",
+    "PBZ_Pangzhen_WP-BP_NPCSpawner_C_UAID_EC9161CFCCC28AD402_1860801851",
+    "EventTag"
+   ],
+   null,
+   "ddsd.周平子.交付遗书"
+  ],
+  [
+   "ldel",
+   [
+    "EventPipeline",
+    "ComponentInfoJson",
+    "PBZ_Pangzhen_WP-BP_NPCSpawner_C_UAID_EC9161CFCCC28AD402_1860801851",
+    "EventTag"
+   ],
+   "pz.雨玲.第一次对话后",
+   null
+  ],
+  [
+   "chg",
+   [
+    "EventPipeline",
+    "ComponentsOwnerActorInfo",
+    "PBZ_Pangzhen_WP-BP_NPCSpawner_C_UAID_EC9161CFCCC28AD402_1860801851",
+    "IdleType"
+   ],
+   "Special2",
+   "Dead"
+  ],
+  [
+   "ladd",
+   [
+    "EventPipeline",
+    "GlobalTags"
+   ],
+   null,
+   "ddsd.周平子.交付遗书"
+  ],
+  [
+   "set",
+   [
+    "EventPipeline",
+    "ExecuteNodeGuid",
+    "PBZ_Pangzhen_WP-BP_NPCSpawner_C_UAID_EC9161CFCCC28AD402_1860801851_4E8B848B4F94E975CD247889960AAC96"
+   ],
+   null,
+   true
+  ],
+  [
+   "set",
+   [
+    "Inventory",
+    "AccessoryInfos",
+    "AC_UltimateBreak"
+   ],
+   null,
+   {
+    "CurrentLevel": 0,
+    "DirtyTime": "2026.11.12-19.26.51",
+    "AcquiredCycle": 0
+   }
+  ],
+  [
+   "chg",
+   [
+    "Narrative",
+    "QuestGameTimes",
+    {
+     "k": "QuestClass",
+     "v": "/Game/PBZstory/PBZQuest/Simple/WuXiangWang.WuXiangWang_C"
+    },
+    "GameTime"
+   ],
+   106671,
+   106708
+  ],
+  [
+   "oreplace",
+   [
+    "Narrative",
+    "NarrativeSavedQuests",
+    {
+     "k": "QuestClass",
+     "v": "/Game/PBZstory/PBZQuest/Simple/WuXiangWang.WuXiangWang_C"
+    }
+   ],
+   {
+    "QuestClass": "/Game/PBZstory/PBZQuest/Simple/WuXiangWang.WuXiangWang_C",
+    "QuestBranches": [
+     {
+      "BranchID": "S1",
+      "BranchType": "EBranchType::BranchCompleted",
+      "DirtyTime": "2026.11.12-19.23.05"
+     },
+     {
+      "BranchID": "1",
+      "BranchType": "EBranchType::BranchActivating",
+      "DirtyTime": "2026.11.12-19.25.51"
+     }
+    ],
+    "QuestCompletion": "EQuestCompletion::QC_Started",
+    "CompletedBranches": [
+     "S1"
+    ],
+    "ReachedStateNames": []
+   },
+   {
+    "QuestClass": "/Game/PBZstory/PBZQuest/Simple/WuXiangWang.WuXiangWang_C",
+    "QuestBranches": [
+     {
+      "BranchID": "S1",
+      "BranchType": "EBranchType::BranchCompleted",
+      "DirtyTime": "2026.11.12-19.23.05"
+     },
+     {
+      "BranchID": "1",
+      "BranchType": "EBranchType::BranchCompleted",
+      "DirtyTime": "2026.11.12-19.26.54"
+     }
+    ],
+    "QuestCompletion": "EQuestCompletion::QC_Succeded",
+    "CompletedBranches": [
+     "S1",
+     "1"
+    ],
+    "ReachedStateNames": []
+   }
+  ]
+ ],
+ "ach_ops": []
+}
