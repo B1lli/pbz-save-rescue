@@ -70,6 +70,10 @@ steam_autocloud.vdf      Steam 云同步标记
 - `BranchType`：`None`（还没触达）、`BranchActivating`（进行中）、`BranchCompleted`（已完成）、`BranchLocked`（被锁死，通常意味着错过了）。
 - 任务路径里的分类目录：`Main` 主线、`Branch` 分支剧情、`Simple` 普通支线、`Collect` 收集、`Tutorial` 教学。
 - 类名是拼音，比如 JianXiYiShi = 见习医师。确认过的中文名记在 `quest_names.json` 里，每确认一个新的就补进去。
+- **`CompletedBranches` 与实际进度可能脱节。** 这个列表是"哪些分支曾经完成过"的独立账本，游戏不会拿 `BranchType` 反推它。真实出现过的情况：某分支记着 `BranchCompleted`，但 ID 从没进过 `CompletedBranches`（多见于任务中途被打断、之后靠改档恢复）。此后玩家每次走回该分支的入口触发点（存档点、牌坊/钟、地图切换），游戏都会把它重新置为 `BranchActivating`，任务栏和地图上于是又冒出一个早就走完的目标 —— 不是存档损坏，是这一步从来没落账。
+  - 判据：该分支 `DirtyTime` 恰好等于这次重回触发点的时间；这一步对应的 `GlobalTags`（进出、对话、交物）早已齐全；依赖它的物证也在（拿到过的道具、打过的 BOSS 记录）。
+  - 处理：`BranchType` 改为 `BranchCompleted`，分支 ID 追加进 `CompletedBranches`，**`QuestCompletion` 不要动** —— 同一任务常有多条分支并行，全部走完才 `QC_Succeded`。
+- **同一任务并存多个 `BranchActivating` 是正常状态。** `TrackedBranchID` 指向的分支不一定就是任务栏当前显示的那条；补掉一个目标后，游戏会把下一条的目标顶上来。不要因为"地图上还剩一个图标"就把其它 `BranchActivating` 一起判完成，那等于跳过整段剧情。
 
 ## 5. 剧情标记与 NPC 状态
 
