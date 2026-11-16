@@ -1,0 +1,667 @@
+{
+ "quest": "XiaoCui",
+ "format": 1,
+ "note": "小翠（XiaoCui）4-A 分支：玩家把 11.14 05:56 的回档打完后，把 4-A 结果移植回最新档的记录。包含：任务记录改为 4-A 完成、分支 5 开始；陆三迁 2「有喝仙露」、3「完成任务/获得书信」及 7 处 NPC 状态；物品 书信 R_070001 与饰品 AC_MartialWeapon（粗糙煌心）。只在一份存档上验证过，别的手动存档未验证。",
+ "slot_ops": [
+  [
+   "set",
+   [
+    "EventPipeline",
+    "ComponentInfoJson",
+    "PBZ_DengDingShanDao_WP-BP_NPCSpawner_C_UAID_60CF84DCBD1804B602_1448409414"
+   ],
+   null,
+   {
+    "EventTag": [
+     "ddsd.陆三迁1.开始笼子里面循环喊话",
+     "ddsd.陆三迁1.首次对话之后"
+    ]
+   }
+  ],
+  [
+   "set",
+   [
+    "EventPipeline",
+    "ComponentInfoJson",
+    "PBZ_DengDingShanDao_WP-BP_NPCSpawner_C_UAID_60CF84DCBD1804B602_1453048417"
+   ],
+   null,
+   {
+    "EventTag": [
+     "ddsd.陆三迁2.开始循环喊话",
+     "ddsd.陆三迁2.完成任务",
+     "ddsd.陆三迁2.有喝仙露"
+    ]
+   }
+  ],
+  [
+   "set",
+   [
+    "EventPipeline",
+    "ComponentInfoJson",
+    "PBZ_DengDingShanDao_WP-BP_NPCSpawner_C_UAID_60CF84DCBD1804B602_1428588401"
+   ],
+   null,
+   {
+    "EventTag": [
+     "ddsd.陆三迁1.出笼子",
+     "ddsd.陆三迁1.开始笼子外面循环喊话",
+     "ddsd.陆三迁1.完成任务",
+     "ddsd.陆三迁1.开门后对话"
+    ]
+   }
+  ],
+  [
+   "set",
+   [
+    "EventPipeline",
+    "ComponentInfoJson",
+    "PBZ_DengDingShanDao_WP-BP_NPCSpawner_C_UAID_60CF84DCBD1804B602_1434361405"
+   ],
+   null,
+   {
+    "EventTag": [
+     "ddsd.陆三迁3.死亡",
+     "ddsd.陆三迁3.获得书信",
+     "ddsd.陆三迁3.完成任务"
+    ]
+   }
+  ],
+  [
+   "set",
+   [
+    "EventPipeline",
+    "ComponentInfoJson",
+    "PBZ_DengDingShanDao_WP-BP_NarrativeCage_C_UAID_74563CC57EE2693A02_1916063970"
+   ],
+   null,
+   {
+    "EventTag": [
+     "ddsd.陆三迁1.结束笼子里面循环喊话",
+     "ddsd.陆三迁1.开笼子"
+    ]
+   }
+  ],
+  [
+   "set",
+   [
+    "EventPipeline",
+    "ComponentInfoJson",
+    "PBZ_DengDingShanDao_WP-BP_FlowActor_C_UAID_DC567BDB4E5E4EE102_1094327135"
+   ],
+   null,
+   {
+    "EventTag": [
+     "ddsd.陆三迁2.看向笼子"
+    ]
+   }
+  ],
+  [
+   "set",
+   [
+    "EventPipeline",
+    "ComponentInfoJson",
+    "PBZ_DengDingShanDao_WP-BP_FlowActor_C_UAID_74563CC57EE2693A02_1903550270"
+   ],
+   null,
+   {
+    "EventTag": [
+     "ddsd.陆三迁2.关闭获得物品UI"
+    ]
+   }
+  ],
+  [
+   "ladd",
+   [
+    "EventPipeline",
+    "GlobalTags"
+   ],
+   null,
+   "ddsd.陆三迁1.杀狗"
+  ],
+  [
+   "ladd",
+   [
+    "EventPipeline",
+    "GlobalTags"
+   ],
+   null,
+   "ddsd.陆三迁1.杀狗主"
+  ],
+  [
+   "ladd",
+   [
+    "EventPipeline",
+    "GlobalTags"
+   ],
+   null,
+   "ddsd.陆三迁1.结束笼子里面循环喊话"
+  ],
+  [
+   "ladd",
+   [
+    "EventPipeline",
+    "GlobalTags"
+   ],
+   null,
+   "ddsd.陆三迁1.开始笼子里面循环喊话"
+  ],
+  [
+   "ladd",
+   [
+    "EventPipeline",
+    "GlobalTags"
+   ],
+   null,
+   "ddsd.陆三迁1.开笼子"
+  ],
+  [
+   "ladd",
+   [
+    "EventPipeline",
+    "GlobalTags"
+   ],
+   null,
+   "ddsd.陆三迁1.首次对话之后"
+  ],
+  [
+   "ladd",
+   [
+    "EventPipeline",
+    "GlobalTags"
+   ],
+   null,
+   "ddsd.陆三迁1.出笼子"
+  ],
+  [
+   "ladd",
+   [
+    "EventPipeline",
+    "GlobalTags"
+   ],
+   null,
+   "ddsd.陆三迁1.开始笼子外面循环喊话"
+  ],
+  [
+   "ladd",
+   [
+    "EventPipeline",
+    "GlobalTags"
+   ],
+   null,
+   "ddsd.陆三迁1.完成任务"
+  ],
+  [
+   "ladd",
+   [
+    "EventPipeline",
+    "GlobalTags"
+   ],
+   null,
+   "ddsd.陆三迁1.开门后对话"
+  ],
+  [
+   "ladd",
+   [
+    "EventPipeline",
+    "GlobalTags"
+   ],
+   null,
+   "ddsd.陆三迁2.看向笼子"
+  ],
+  [
+   "ladd",
+   [
+    "EventPipeline",
+    "GlobalTags"
+   ],
+   null,
+   "ddsd.击杀.陆三迁2怪组"
+  ],
+  [
+   "ladd",
+   [
+    "EventPipeline",
+    "GlobalTags"
+   ],
+   null,
+   "ddsd.陆三迁2.关闭获得物品UI"
+  ],
+  [
+   "ladd",
+   [
+    "EventPipeline",
+    "GlobalTags"
+   ],
+   null,
+   "ddsd.陆三迁2.开始循环喊话"
+  ],
+  [
+   "ladd",
+   [
+    "EventPipeline",
+    "GlobalTags"
+   ],
+   null,
+   "ddsd.陆三迁2.降下笼子"
+  ],
+  [
+   "ladd",
+   [
+    "EventPipeline",
+    "GlobalTags"
+   ],
+   null,
+   "ddsd.陆三迁2.开笼子"
+  ],
+  [
+   "ladd",
+   [
+    "EventPipeline",
+    "GlobalTags"
+   ],
+   null,
+   "ddsd.陆三迁2.完成任务"
+  ],
+  [
+   "ladd",
+   [
+    "EventPipeline",
+    "GlobalTags"
+   ],
+   null,
+   "ddsd.陆三迁2.有喝仙露"
+  ],
+  [
+   "ladd",
+   [
+    "EventPipeline",
+    "GlobalTags"
+   ],
+   null,
+   "ddsd.陆三迁3.死亡"
+  ],
+  [
+   "ladd",
+   [
+    "EventPipeline",
+    "GlobalTags"
+   ],
+   null,
+   "ddsd.陆三迁3.获得书信"
+  ],
+  [
+   "ladd",
+   [
+    "EventPipeline",
+    "GlobalTags"
+   ],
+   null,
+   "ddsd.陆三迁3.完成任务"
+  ],
+  [
+   "set",
+   [
+    "Inventory",
+    "InventoryInfos",
+    "TU_09001"
+   ],
+   null,
+   {
+    "CurrentAmount": 1,
+    "MaxAmount": 1,
+    "FirstAddTime": "2026.11.15-20.19.22",
+    "DirtyTime": "2026.11.15-20.19.22",
+    "AcquiredCycle": 0
+   }
+  ],
+  [
+   "set",
+   [
+    "Inventory",
+    "InventoryInfos",
+    "R_070011"
+   ],
+   null,
+   {
+    "CurrentAmount": 1,
+    "MaxAmount": 1,
+    "FirstAddTime": "2026.11.15-20.33.38",
+    "DirtyTime": "2026.11.15-20.33.38",
+    "AcquiredCycle": 0
+   }
+  ],
+  [
+   "set",
+   [
+    "Inventory",
+    "InventoryInfos",
+    "I_10001"
+   ],
+   null,
+   {
+    "CurrentAmount": 0,
+    "MaxAmount": 1,
+    "FirstAddTime": "2026.11.15-20.33.42",
+    "DirtyTime": "2026.11.15-20.33.42",
+    "AcquiredCycle": 0
+   }
+  ],
+  [
+   "set",
+   [
+    "Inventory",
+    "InventoryInfos",
+    "K_10001"
+   ],
+   null,
+   {
+    "CurrentAmount": 0,
+    "MaxAmount": 1,
+    "FirstAddTime": "2026.11.15-20.41.46",
+    "DirtyTime": "2026.11.15-20.41.46",
+    "AcquiredCycle": 0
+   }
+  ],
+  [
+   "set",
+   [
+    "Inventory",
+    "InventoryInfos",
+    "R_070012"
+   ],
+   null,
+   {
+    "CurrentAmount": 1,
+    "MaxAmount": 1,
+    "FirstAddTime": "2026.11.15-20.42.07",
+    "DirtyTime": "2026.11.15-20.42.07",
+    "AcquiredCycle": 0
+   }
+  ],
+  [
+   "set",
+   [
+    "Inventory",
+    "InventoryInfos",
+    "R_070002"
+   ],
+   null,
+   {
+    "CurrentAmount": 1,
+    "MaxAmount": 1,
+    "FirstAddTime": "2026.11.15-20.43.22",
+    "DirtyTime": "2026.11.15-20.43.22",
+    "AcquiredCycle": 0
+   }
+  ],
+  [
+   "set",
+   [
+    "Inventory",
+    "InventoryInfos",
+    "K_10002"
+   ],
+   null,
+   {
+    "CurrentAmount": 0,
+    "MaxAmount": 1,
+    "FirstAddTime": "2026.11.15-20.44.43",
+    "DirtyTime": "2026.11.15-20.44.43",
+    "AcquiredCycle": 0
+   }
+  ],
+  [
+   "set",
+   [
+    "Inventory",
+    "InventoryInfos",
+    "R_070001"
+   ],
+   null,
+   {
+    "CurrentAmount": 1,
+    "MaxAmount": 1,
+    "FirstAddTime": "2026.11.15-20.52.41",
+    "DirtyTime": "2026.11.15-20.52.41",
+    "AcquiredCycle": 0
+   }
+  ],
+  [
+   "set",
+   [
+    "Inventory",
+    "AccessoryInfos",
+    "AC_MartialWeapon"
+   ],
+   null,
+   {
+    "CurrentLevel": 0,
+    "DirtyTime": "2026.11.15-20.52.47",
+    "AcquiredCycle": 0
+   }
+  ],
+  [
+   "chg",
+   [
+    "Narrative",
+    "QuestGameTimes",
+    {
+     "k": "QuestClass",
+     "v": "/Game/PBZstory/PBZQuest/Simple/XiaoCui.XiaoCui_C"
+    },
+    "GameTime"
+   ],
+   84574,
+   137627
+  ],
+  [
+   "oreplace",
+   [
+    "Narrative",
+    "NarrativeSavedQuests",
+    {
+     "k": "QuestClass",
+     "v": "/Game/PBZstory/PBZQuest/Simple/XiaoCui.XiaoCui_C"
+    }
+   ],
+   {
+    "QuestClass": "/Game/PBZstory/PBZQuest/Simple/XiaoCui.XiaoCui_C",
+    "QuestBranches": [
+     {
+      "BranchID": "2",
+      "TasksProgress": [
+       0
+      ],
+      "BranchType": "EBranchType::None",
+      "DirtyTime": "0001.01.01-00.00.00"
+     },
+     {
+      "BranchID": "4-A",
+      "BranchType": "EBranchType::None",
+      "DirtyTime": "0001.01.01-00.00.00"
+     },
+     {
+      "BranchID": "4-B",
+      "BranchType": "EBranchType::None",
+      "DirtyTime": "0001.01.01-00.00.00"
+     },
+     {
+      "BranchID": "2-ex",
+      "BranchType": "EBranchType::None",
+      "DirtyTime": "0001.01.01-00.00.00"
+     },
+     {
+      "BranchID": "1",
+      "BranchType": "EBranchType::BranchActivating",
+      "DirtyTime": "2026.11.10-02.08.04"
+     },
+     {
+      "BranchID": "3",
+      "BranchType": "EBranchType::None",
+      "DirtyTime": "0001.01.01-00.00.00"
+     },
+     {
+      "BranchID": "5",
+      "BranchType": "EBranchType::None",
+      "DirtyTime": "0001.01.01-00.00.00"
+     },
+     {
+      "BranchID": "6",
+      "BranchType": "EBranchType::None",
+      "DirtyTime": "0001.01.01-00.00.00"
+     }
+    ],
+    "QuestCompletion": "EQuestCompletion::QC_Started",
+    "ReachedStateNames": []
+   },
+   {
+    "QuestClass": "/Game/PBZstory/PBZQuest/Simple/XiaoCui.XiaoCui_C",
+    "QuestBranches": [
+     {
+      "BranchID": "2",
+      "TasksProgress": [
+       0
+      ],
+      "BranchType": "EBranchType::BranchCompleted",
+      "DirtyTime": "2026.11.15-20.34.18"
+     },
+     {
+      "BranchID": "4-A",
+      "BranchType": "EBranchType::BranchCompleted",
+      "DirtyTime": "2026.11.15-20.52.05"
+     },
+     {
+      "BranchID": "4-B",
+      "BranchType": "EBranchType::None",
+      "DirtyTime": "0001.01.01-00.00.00"
+     },
+     {
+      "BranchID": "2-ex",
+      "BranchType": "EBranchType::BranchCompleted",
+      "DirtyTime": "2026.11.15-20.43.48"
+     },
+     {
+      "BranchID": "1",
+      "BranchType": "EBranchType::BranchCompleted",
+      "DirtyTime": "2026.11.15-20.20.27"
+     },
+     {
+      "BranchID": "3",
+      "BranchType": "EBranchType::BranchCompleted",
+      "DirtyTime": "2026.11.15-20.46.39"
+     },
+     {
+      "BranchID": "5",
+      "BranchType": "EBranchType::BranchActivating",
+      "DirtyTime": "2026.11.15-20.52.51"
+     },
+     {
+      "BranchID": "6",
+      "BranchType": "EBranchType::None",
+      "DirtyTime": "0001.01.01-00.00.00"
+     }
+    ],
+    "QuestCompletion": "EQuestCompletion::QC_Started",
+    "CompletedBranches": [
+     "1",
+     "2",
+     "2-ex",
+     "3",
+     "4-A"
+    ],
+    "ReachedStateNames": []
+   }
+  ]
+ ],
+ "ach_ops": [],
+ "quest_cn": "小翠",
+ "requires": [
+  {
+   "path": [
+    "PBZGameSystem",
+    "CycleCount"
+   ],
+   "op": "equals",
+   "value": 0
+  },
+  {
+   "path": [
+    "Narrative",
+    "NarrativeSavedQuests",
+    {
+     "k": "QuestClass",
+     "v": "/Game/PBZstory/PBZQuest/Simple/XiaoCui.XiaoCui_C"
+    },
+    "QuestCompletion"
+   ],
+   "op": "equals",
+   "value": "EQuestCompletion::QC_Succeded"
+  },
+  {
+   "path": [
+    "Narrative",
+    "NarrativeSavedQuests",
+    {
+     "k": "QuestClass",
+     "v": "/Game/PBZstory/PBZQuest/Simple/XiaoCui.XiaoCui_C"
+    },
+    "QuestBranches",
+    {
+     "k": "BranchID",
+     "v": "4-B"
+    },
+    "BranchType"
+   ],
+   "op": "equals",
+   "value": "EBranchType::BranchCompleted"
+  },
+  {
+   "path": [
+    "Narrative",
+    "NarrativeSavedQuests",
+    {
+     "k": "QuestClass",
+     "v": "/Game/PBZstory/PBZQuest/Simple/XiaoCui.XiaoCui_C"
+    },
+    "QuestBranches",
+    {
+     "k": "BranchID",
+     "v": "4-A"
+    },
+    "BranchType"
+   ],
+   "op": "equals",
+   "value": "EBranchType::None"
+  },
+  {
+   "path": [
+    "Narrative",
+    "NarrativeSavedQuests",
+    {
+     "k": "QuestClass",
+     "v": "/Game/PBZstory/PBZQuest/Simple/XiaoCui.XiaoCui_C"
+    },
+    "QuestBranches",
+    {
+     "k": "BranchID",
+     "v": "5"
+    },
+    "BranchType"
+   ],
+   "op": "equals",
+   "value": "EBranchType::None"
+  },
+  {
+   "path": [
+    "EventPipeline",
+    "GlobalTags"
+   ],
+   "op": "contains_all",
+   "value": [
+    "ddsd.陆三迁3.死亡",
+    "ddsd.陆三迁2.没喝仙露"
+   ]
+  }
+ ]
+}
