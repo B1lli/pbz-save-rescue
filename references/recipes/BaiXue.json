@@ -1,0 +1,875 @@
+{
+  "quest": "BaiXue",
+  "format": 1,
+  "note": "《赎罪名单》放走铁面后的《白雪儿》补救。适用于首周目、后街小院已经打开、沾血的项链仍在、白雪儿尚未接取的存档。根据实机重选及交付后的事件差异整理。",
+  "requires": [
+    {
+      "path": [
+        "PBZGameSystem",
+        "CycleCount"
+      ],
+      "op": "equals",
+      "value": 0
+    },
+    {
+      "path": [
+        "EventPipeline",
+        "GlobalTags"
+      ],
+      "op": "contains_all",
+      "value": [
+        "ddsd.获得物品.赎罪名单",
+        "ddsd.杀气怪面.放走"
+      ]
+    },
+    {
+      "path": [
+        "Inventory",
+        "InventoryInfos",
+        "K_05007",
+        "CurrentAmount"
+      ],
+      "op": "equals",
+      "value": 0
+    },
+    {
+      "path": [
+        "LevelActorManager",
+        "PBZ_Houjie_WP-BP_Block_Gate_C_UAID_60CF8480990968B202_1720972634",
+        "DoorOpen"
+      ],
+      "op": "equals",
+      "value": true
+    },
+    {
+      "path": [
+        "MapSubsystem",
+        "EndedLockObjGuids"
+      ],
+      "op": "contains_all",
+      "value": [
+        "PBZ_Houjie_WP-BP_Block_Gate_C_UAID_60CF8480990968B202_1720972634"
+      ]
+    },
+    {
+      "path": [
+        "EventPipeline",
+        "ComponentInfoJson",
+        "PBZ_Houjie_WP-BP_FlowInteract_MemoryFlower_C_UAID_E89C25A7512642AF02_1937563463",
+        "EventTag"
+      ],
+      "op": "equals",
+      "value": []
+    },
+    {
+      "path": [
+        "EventPipeline",
+        "ComponentInfoJson",
+        "PBZ_Houjie_WP-BP_FlowInteract_MemoryFlower_C_UAID_E89C25A7512642AF02_1937518462",
+        "EventTag"
+      ],
+      "op": "equals",
+      "value": []
+    },
+    {
+      "path": [
+        "EventPipeline",
+        "ComponentInfoJson",
+        "PBZ_DengDingShanDao_WP-BP_NPCSpawner_C_UAID_BCFCE707895E70E102_1595521842",
+        "EventTag"
+      ],
+      "op": "equals",
+      "value": []
+    },
+    {
+      "path": [
+        "EventPipeline",
+        "ComponentInfoJson",
+        "PBZ_DengDingShanDao_WP-BP_AISpawner_C_UAID_74563CC57EE2693A02_1905835454",
+        "EventTag"
+      ],
+      "op": "equals",
+      "value": [
+        "ddsd.杀气怪面.放走"
+      ]
+    },
+    {
+      "path": [
+        "EventPipeline",
+        "ComponentsOwnerActorInfo",
+        "PBZ_Houjie_WP-BP_FlowInteract_MemoryFlower_C_UAID_E89C25A7512642AF02_1937563463",
+        "OwnerVisible"
+      ],
+      "op": "equals",
+      "value": false
+    },
+    {
+      "path": [
+        "EventPipeline",
+        "ComponentsOwnerActorInfo",
+        "PBZ_Houjie_WP-BP_FlowInteract_MemoryFlower_C_UAID_E89C25A7512642AF02_1937518462",
+        "OwnerVisible"
+      ],
+      "op": "equals",
+      "value": false
+    },
+    {
+      "path": [
+        "EventPipeline",
+        "ComponentsOwnerActorInfo",
+        "PBZ_DengDingShanDao_WP-BP_NPCSpawner_C_UAID_BCFCE707895E70E102_1595521842",
+        "IdleType"
+      ],
+      "op": "equals",
+      "value": "Crouch"
+    },
+    {
+      "path": [
+        "EventPipeline",
+        "ComponentsOwnerActorInfo",
+        "PBZ_DengDingShanDao_WP-BP_NPCSpawner_C_UAID_BCFCE707895E70E102_1595521842",
+        "OwnerAnim"
+      ],
+      "op": "equals",
+      "value": null
+    },
+    {
+      "path": [
+        "EventPipeline",
+        "ComponentsOwnerActorInfo",
+        "PBZ_DengDingShanDao_WP-BP_NPCSpawner_C_UAID_BCFCE707895E70E102_1595521842",
+        "OwnerVisible"
+      ],
+      "op": "equals",
+      "value": false
+    },
+    {
+      "path": [
+        "EventPipeline",
+        "ComponentsOwnerActorInfo",
+        "PBZ_DengDingShanDao_WP-BP_AISpawner_C_UAID_74563CC57EE2693A02_1905835454",
+        "CanAttack"
+      ],
+      "op": "equals",
+      "value": null
+    },
+    {
+      "path": [
+        "EventPipeline",
+        "ComponentsOwnerActorInfo",
+        "PBZ_DengDingShanDao_WP-BP_AISpawner_C_UAID_74563CC57EE2693A02_1905835454",
+        "IsMonster"
+      ],
+      "op": "equals",
+      "value": null
+    },
+    {
+      "path": [
+        "EventPipeline",
+        "ComponentsOwnerActorInfo",
+        "PBZ_DengDingShanDao_WP-BP_AISpawner_C_UAID_74563CC57EE2693A02_1905835454",
+        "IsAIStarted"
+      ],
+      "op": "equals",
+      "value": null
+    },
+    {
+      "path": [
+        "EventPipeline",
+        "ComponentsOwnerActorInfo",
+        "PBZ_DengDingShanDao_WP-BP_AISpawner_C_UAID_74563CC57EE2693A02_1905835454",
+        "OwnerVisible"
+      ],
+      "op": "equals",
+      "value": false
+    },
+    {
+      "path": [
+        "EventPipeline",
+        "ComponentsOwnerActorInfo",
+        "PBZ_DengDingShanDao_WP-BP_AISpawner_C_UAID_74563CC57EE2693A02_1905835454",
+        "OwnerAnim"
+      ],
+      "op": "equals",
+      "value": "/HuaShira/Characters/NPC/Total/Anim/Dialogue/Qiangrenguaimian_walk.Qiangrenguaimian_walk"
+    },
+    {
+      "path": [
+        "EventPipeline",
+        "ExecuteNodeGuid",
+        "PBZ_DengDingShanDao_WPBP_AISpawner_C_UAID_74563CC57EE2693A02_1905835454_9DBF260148B44CDFB0B07D90A203FBEC"
+      ],
+      "op": "equals",
+      "value": null
+    },
+    {
+      "path": [
+        "EventPipeline",
+        "ExecuteNodeGuid",
+        "AC655EC4476CC8CC6F8A619F5A8B8B19"
+      ],
+      "op": "equals",
+      "value": null
+    },
+    {
+      "path": [
+        "EventPipeline",
+        "ExecuteNodeGuid",
+        "PBZ_DengDingShanDao_WP-BP_NPCSpawner_C_UAID_BCFCE707895E70E102_1595521842_9D1C9B6143A4D8A39C538F83860C5388"
+      ],
+      "op": "equals",
+      "value": null
+    },
+    {
+      "path": [
+        "EventPipeline",
+        "ExecuteNodeGuid",
+        "4C4F2DA549A49E3C5FC8049E6D07537B"
+      ],
+      "op": "equals",
+      "value": null
+    },
+    {
+      "path": [
+        "EventPipeline",
+        "ExecuteNodeGuid",
+        "PBZ_DengDingShanDao_WP-BP_NPCSpawner_C_UAID_BCFCE707895E70E102_1595521842_CB107FC741A6A261510768AF48EC5DDB"
+      ],
+      "op": "equals",
+      "value": null
+    },
+    {
+      "path": [
+        "EventPipeline",
+        "ExecuteNodeGuid",
+        "PBZ_Houjie_WP-BP_FlowInteract_MemoryFlower_C_UAID_E89C25A7512642AF02_1937518462_2D6347AB44A9DA5EC54BC9981CB458C5"
+      ],
+      "op": "equals",
+      "value": null
+    },
+    {
+      "path": [
+        "EventPipeline",
+        "ExecuteNodeGuid",
+        "PBZ_Houjie_WP-BP_FlowInteract_MemoryFlower_C_UAID_E89C25A7512642AF02_1937563463_37BD708F490FA96DA1E81ABEA4619D3E"
+      ],
+      "op": "equals",
+      "value": null
+    },
+    {
+      "path": [
+        "EventPipeline",
+        "ExecuteNodeGuid",
+        "PBZ_Houjie_WP-BP_FlowInteract_MemoryFlower_C_UAID_E89C25A7512642AF02_1937518462_E331E59E44D6327ADCC772879EC0FEFD"
+      ],
+      "op": "equals",
+      "value": null
+    },
+    {
+      "path": [
+        "EventPipeline",
+        "ExecuteNodeGuid",
+        "PBZ_Houjie_WP-BP_FlowInteract_MemoryFlower_C_UAID_E89C25A7512642AF02_1937563463_67FC7DCA4D0A2763B1ECDFA6FC9DE5A4"
+      ],
+      "op": "equals",
+      "value": null
+    },
+    {
+      "path": [
+        "EventPipeline",
+        "ExecuteNodeGuid",
+        "PBZ_Houjie_WP-BP_FlowInteractActor_C_UAID_E89C25A7512642AF02_1937059461_8D3E62A6435BA9E0A33DF6A4437BADC1"
+      ],
+      "op": "equals",
+      "value": null
+    },
+    {
+      "path": [
+        "EventPipeline",
+        "ExecuteNodeGuid",
+        "PBZ_DengDingShanDao_WP-BP_NPCSpawner_C_UAID_BCFCE707895E70E102_1595521842_12EE60784F47DF7A321F38A1528FFAF6"
+      ],
+      "op": "equals",
+      "value": true
+    },
+    {
+      "path": [
+        "LevelActorManager",
+        "PBZ_Houjie_WP-BP_FlowInteract_MemoryFlower_C_UAID_E89C25A7512642AF02_1937518462"
+      ],
+      "op": "equals",
+      "value": null
+    },
+    {
+      "path": [
+        "LevelActorManager",
+        "PBZ_Houjie_WP-BP_FlowInteract_MemoryFlower_C_UAID_E89C25A7512642AF02_1937563463"
+      ],
+      "op": "equals",
+      "value": null
+    },
+    {
+      "path": [
+        "Inventory",
+        "InventoryInfos",
+        "I_10003",
+        "CurrentAmount"
+      ],
+      "op": "equals",
+      "value": 1
+    },
+    {
+      "path": [
+        "Inventory",
+        "InventoryInfos",
+        "F_06004"
+      ],
+      "op": "equals",
+      "value": null
+    },
+    {
+      "path": [
+        "Inventory",
+        "InventoryInfos",
+        "F_06022"
+      ],
+      "op": "equals",
+      "value": null
+    },
+    {
+      "path": [
+        "Inventory",
+        "InventoryInfos",
+        "FA_0602"
+      ],
+      "op": "equals",
+      "value": null
+    },
+    {
+      "path": [
+        "Inventory",
+        "AccessoryInfos",
+        "AC_Bleed"
+      ],
+      "op": "equals",
+      "value": null
+    },
+    {
+      "path": [
+        "Narrative",
+        "QuestGameTimes",
+        {
+          "k": "QuestClass",
+          "v": "/Game/PBZstory/PBZQuest/Simple/BaiXue.BaiXue_C"
+        }
+      ],
+      "op": "equals",
+      "value": null
+    },
+    {
+      "path": [
+        "Narrative",
+        "NarrativeSavedQuests",
+        {
+          "k": "QuestClass",
+          "v": "/Game/PBZstory/PBZQuest/Simple/BaiXue.BaiXue_C"
+        }
+      ],
+      "op": "equals",
+      "value": null
+    }
+  ],
+  "slot_ops": [
+    [
+      "ladd",
+      [
+        "EventPipeline",
+        "ComponentInfoJson",
+        "PBZ_Houjie_WP-BP_FlowInteract_MemoryFlower_C_UAID_E89C25A7512642AF02_1937563463",
+        "EventTag"
+      ],
+      null,
+      "pz.老槐树.可以挖掘"
+    ],
+    [
+      "ladd",
+      [
+        "EventPipeline",
+        "ComponentInfoJson",
+        "PBZ_Houjie_WP-BP_FlowInteract_MemoryFlower_C_UAID_E89C25A7512642AF02_1937518462",
+        "EventTag"
+      ],
+      null,
+      "pz.老槐树.解锁记忆之花"
+    ],
+    [
+      "ladd",
+      [
+        "EventPipeline",
+        "ComponentInfoJson",
+        "PBZ_DengDingShanDao_WP-BP_NPCSpawner_C_UAID_BCFCE707895E70E102_1595521842",
+        "EventTag"
+      ],
+      null,
+      "ddsd.白雪儿.接任务"
+    ],
+    [
+      "ladd",
+      [
+        "EventPipeline",
+        "ComponentInfoJson",
+        "PBZ_DengDingShanDao_WP-BP_AISpawner_C_UAID_74563CC57EE2693A02_1905835454",
+        "EventTag"
+      ],
+      null,
+      "ddsd.杀气怪面.不放走"
+    ],
+    [
+      "ladd",
+      [
+        "EventPipeline",
+        "ComponentInfoJson",
+        "PBZ_DengDingShanDao_WP-BP_AISpawner_C_UAID_74563CC57EE2693A02_1905835454",
+        "EventTag"
+      ],
+      null,
+      "ddsd.杀气怪面.死亡"
+    ],
+    [
+      "ldel",
+      [
+        "EventPipeline",
+        "ComponentInfoJson",
+        "PBZ_DengDingShanDao_WP-BP_AISpawner_C_UAID_74563CC57EE2693A02_1905835454",
+        "EventTag"
+      ],
+      "ddsd.杀气怪面.放走",
+      null
+    ],
+    [
+      "del",
+      [
+        "EventPipeline",
+        "ComponentsOwnerActorInfo",
+        "PBZ_Houjie_WP-BP_FlowInteract_MemoryFlower_C_UAID_E89C25A7512642AF02_1937563463",
+        "OwnerVisible"
+      ],
+      false,
+      null
+    ],
+    [
+      "del",
+      [
+        "EventPipeline",
+        "ComponentsOwnerActorInfo",
+        "PBZ_Houjie_WP-BP_FlowInteract_MemoryFlower_C_UAID_E89C25A7512642AF02_1937518462",
+        "OwnerVisible"
+      ],
+      false,
+      null
+    ],
+    [
+      "chg",
+      [
+        "EventPipeline",
+        "ComponentsOwnerActorInfo",
+        "PBZ_DengDingShanDao_WP-BP_NPCSpawner_C_UAID_BCFCE707895E70E102_1595521842",
+        "IdleType"
+      ],
+      "Crouch",
+      "Dead"
+    ],
+    [
+      "set",
+      [
+        "EventPipeline",
+        "ComponentsOwnerActorInfo",
+        "PBZ_DengDingShanDao_WP-BP_NPCSpawner_C_UAID_BCFCE707895E70E102_1595521842",
+        "OwnerAnim"
+      ],
+      null,
+      "/HuaShira/Characters/NPC/Total/Anim/Dialogue/Baixueer_sp07.Baixueer_sp07"
+    ],
+    [
+      "del",
+      [
+        "EventPipeline",
+        "ComponentsOwnerActorInfo",
+        "PBZ_DengDingShanDao_WP-BP_NPCSpawner_C_UAID_BCFCE707895E70E102_1595521842",
+        "OwnerVisible"
+      ],
+      false,
+      null
+    ],
+    [
+      "set",
+      [
+        "EventPipeline",
+        "ComponentsOwnerActorInfo",
+        "PBZ_DengDingShanDao_WP-BP_AISpawner_C_UAID_74563CC57EE2693A02_1905835454",
+        "CanAttack"
+      ],
+      null,
+      true
+    ],
+    [
+      "set",
+      [
+        "EventPipeline",
+        "ComponentsOwnerActorInfo",
+        "PBZ_DengDingShanDao_WP-BP_AISpawner_C_UAID_74563CC57EE2693A02_1905835454",
+        "IsMonster"
+      ],
+      null,
+      true
+    ],
+    [
+      "set",
+      [
+        "EventPipeline",
+        "ComponentsOwnerActorInfo",
+        "PBZ_DengDingShanDao_WP-BP_AISpawner_C_UAID_74563CC57EE2693A02_1905835454",
+        "IsAIStarted"
+      ],
+      null,
+      true
+    ],
+    [
+      "del",
+      [
+        "EventPipeline",
+        "ComponentsOwnerActorInfo",
+        "PBZ_DengDingShanDao_WP-BP_AISpawner_C_UAID_74563CC57EE2693A02_1905835454",
+        "OwnerVisible"
+      ],
+      false,
+      null
+    ],
+    [
+      "del",
+      [
+        "EventPipeline",
+        "ComponentsOwnerActorInfo",
+        "PBZ_DengDingShanDao_WP-BP_AISpawner_C_UAID_74563CC57EE2693A02_1905835454",
+        "OwnerAnim"
+      ],
+      "/HuaShira/Characters/NPC/Total/Anim/Dialogue/Qiangrenguaimian_walk.Qiangrenguaimian_walk",
+      null
+    ],
+    [
+      "ladd",
+      [
+        "EventPipeline",
+        "GlobalTags"
+      ],
+      null,
+      "ddsd.杀气怪面.不放走"
+    ],
+    [
+      "ladd",
+      [
+        "EventPipeline",
+        "GlobalTags"
+      ],
+      null,
+      "ddsd.杀气怪面.死亡"
+    ],
+    [
+      "ladd",
+      [
+        "EventPipeline",
+        "GlobalTags"
+      ],
+      null,
+      "ddsd.白雪儿.接任务"
+    ],
+    [
+      "ladd",
+      [
+        "EventPipeline",
+        "GlobalTags"
+      ],
+      null,
+      "pz.老槐树.解锁记忆之花"
+    ],
+    [
+      "ladd",
+      [
+        "EventPipeline",
+        "GlobalTags"
+      ],
+      null,
+      "pz.老槐树.可以挖掘"
+    ],
+    [
+      "ldel",
+      [
+        "EventPipeline",
+        "GlobalTags"
+      ],
+      "ddsd.杀气怪面.放走",
+      null
+    ],
+    [
+      "set",
+      [
+        "EventPipeline",
+        "ExecuteNodeGuid",
+        "PBZ_DengDingShanDao_WPBP_AISpawner_C_UAID_74563CC57EE2693A02_1905835454_9DBF260148B44CDFB0B07D90A203FBEC"
+      ],
+      null,
+      true
+    ],
+    [
+      "set",
+      [
+        "EventPipeline",
+        "ExecuteNodeGuid",
+        "AC655EC4476CC8CC6F8A619F5A8B8B19"
+      ],
+      null,
+      true
+    ],
+    [
+      "set",
+      [
+        "EventPipeline",
+        "ExecuteNodeGuid",
+        "PBZ_DengDingShanDao_WP-BP_NPCSpawner_C_UAID_BCFCE707895E70E102_1595521842_9D1C9B6143A4D8A39C538F83860C5388"
+      ],
+      null,
+      true
+    ],
+    [
+      "set",
+      [
+        "EventPipeline",
+        "ExecuteNodeGuid",
+        "4C4F2DA549A49E3C5FC8049E6D07537B"
+      ],
+      null,
+      true
+    ],
+    [
+      "set",
+      [
+        "EventPipeline",
+        "ExecuteNodeGuid",
+        "PBZ_DengDingShanDao_WP-BP_NPCSpawner_C_UAID_BCFCE707895E70E102_1595521842_CB107FC741A6A261510768AF48EC5DDB"
+      ],
+      null,
+      true
+    ],
+    [
+      "set",
+      [
+        "EventPipeline",
+        "ExecuteNodeGuid",
+        "PBZ_Houjie_WP-BP_FlowInteract_MemoryFlower_C_UAID_E89C25A7512642AF02_1937518462_2D6347AB44A9DA5EC54BC9981CB458C5"
+      ],
+      null,
+      true
+    ],
+    [
+      "set",
+      [
+        "EventPipeline",
+        "ExecuteNodeGuid",
+        "PBZ_Houjie_WP-BP_FlowInteract_MemoryFlower_C_UAID_E89C25A7512642AF02_1937563463_37BD708F490FA96DA1E81ABEA4619D3E"
+      ],
+      null,
+      true
+    ],
+    [
+      "set",
+      [
+        "EventPipeline",
+        "ExecuteNodeGuid",
+        "PBZ_Houjie_WP-BP_FlowInteract_MemoryFlower_C_UAID_E89C25A7512642AF02_1937518462_E331E59E44D6327ADCC772879EC0FEFD"
+      ],
+      null,
+      true
+    ],
+    [
+      "set",
+      [
+        "EventPipeline",
+        "ExecuteNodeGuid",
+        "PBZ_Houjie_WP-BP_FlowInteract_MemoryFlower_C_UAID_E89C25A7512642AF02_1937563463_67FC7DCA4D0A2763B1ECDFA6FC9DE5A4"
+      ],
+      null,
+      true
+    ],
+    [
+      "set",
+      [
+        "EventPipeline",
+        "ExecuteNodeGuid",
+        "PBZ_Houjie_WP-BP_FlowInteractActor_C_UAID_E89C25A7512642AF02_1937059461_8D3E62A6435BA9E0A33DF6A4437BADC1"
+      ],
+      null,
+      true
+    ],
+    [
+      "del",
+      [
+        "EventPipeline",
+        "ExecuteNodeGuid",
+        "PBZ_DengDingShanDao_WP-BP_NPCSpawner_C_UAID_BCFCE707895E70E102_1595521842_12EE60784F47DF7A321F38A1528FFAF6"
+      ],
+      true,
+      null
+    ],
+    [
+      "set",
+      [
+        "LevelActorManager",
+        "PBZ_Houjie_WP-BP_FlowInteract_MemoryFlower_C_UAID_E89C25A7512642AF02_1937518462"
+      ],
+      null,
+      {
+        "HasDestory": true
+      }
+    ],
+    [
+      "set",
+      [
+        "LevelActorManager",
+        "PBZ_Houjie_WP-BP_FlowInteract_MemoryFlower_C_UAID_E89C25A7512642AF02_1937563463"
+      ],
+      null,
+      {
+        "HasDestory": true
+      }
+    ],
+    [
+      "chg",
+      [
+        "Inventory",
+        "InventoryInfos",
+        "I_10003",
+        "CurrentAmount"
+      ],
+      1,
+      0
+    ],
+    [
+      "set",
+      [
+        "Inventory",
+        "InventoryInfos",
+        "F_06004"
+      ],
+      null,
+      {
+        "CurrentAmount": 1,
+        "MaxAmount": 1,
+        "FirstAddTime": "9999.12.31-23.59.59",
+        "DirtyTime": "9999.12.31-23.59.59",
+        "AcquiredCycle": 0
+      }
+    ],
+    [
+      "set",
+      [
+        "Inventory",
+        "InventoryInfos",
+        "F_06022"
+      ],
+      null,
+      {
+        "CurrentAmount": 1,
+        "MaxAmount": 1,
+        "FirstAddTime": "9999.12.31-23.59.59",
+        "DirtyTime": "9999.12.31-23.59.59",
+        "AcquiredCycle": 0
+      }
+    ],
+    [
+      "set",
+      [
+        "Inventory",
+        "InventoryInfos",
+        "FA_0602"
+      ],
+      null,
+      {
+        "CurrentAmount": 1,
+        "MaxAmount": 1,
+        "FirstAddTime": "9999.12.31-23.59.59",
+        "DirtyTime": "9999.12.31-23.59.59",
+        "AcquiredCycle": 0
+      }
+    ],
+    [
+      "set",
+      [
+        "Inventory",
+        "AccessoryInfos",
+        "AC_Bleed"
+      ],
+      null,
+      {
+        "CurrentLevel": 0,
+        "DirtyTime": "9999.12.31-23.59.59",
+        "AcquiredCycle": 0
+      }
+    ],
+    [
+      "oadd",
+      [
+        "Narrative",
+        "QuestGameTimes",
+        {
+          "k": "QuestClass",
+          "v": "/Game/PBZstory/PBZQuest/Simple/BaiXue.BaiXue_C"
+        }
+      ],
+      null,
+      {
+        "QuestClass": "/Game/PBZstory/PBZQuest/Simple/BaiXue.BaiXue_C",
+        "GameTime": 2147483647
+      }
+    ],
+    [
+      "oadd",
+      [
+        "Narrative",
+        "NarrativeSavedQuests",
+        {
+          "k": "QuestClass",
+          "v": "/Game/PBZstory/PBZQuest/Simple/BaiXue.BaiXue_C"
+        }
+      ],
+      null,
+      {
+        "QuestClass": "/Game/PBZstory/PBZQuest/Simple/BaiXue.BaiXue_C",
+        "QuestBranches": [
+          {
+            "BranchID": "1",
+            "BranchType": "EBranchType::BranchCompleted",
+            "DirtyTime": "9999.12.31-23.59.59"
+          },
+          {
+            "BranchID": "2",
+            "BranchType": "EBranchType::BranchCompleted",
+            "DirtyTime": "9999.12.31-23.59.59"
+          },
+          {
+            "BranchID": "3",
+            "BranchType": "EBranchType::BranchCompleted",
+            "DirtyTime": "9999.12.31-23.59.59"
+          }
+        ],
+        "QuestCompletion": "EQuestCompletion::QC_Succeded",
+        "CompletedBranches": [
+          "1",
+          "2",
+          "3"
+        ],
+        "ReachedStateNames": []
+      }
+    ]
+  ],
+  "ach_ops": []
+}
