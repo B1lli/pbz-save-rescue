@@ -25,13 +25,31 @@ import transplant as T
 RECIPES = os.path.join(HERE, "..", "references", "recipes")
 
 
+def quest_matches(quest_class, name):
+    short = quest_class.rsplit(".", 1)[-1].removesuffix("_C")
+    return name == quest_class or name.lower() == short.lower()
+
+
 def find_quest(target, q):
     for x in target.get("Narrative", {}).get("NarrativeSavedQuests", []):
         cls = x.get("QuestClass", "")
-        short = cls.rsplit(".", 1)[-1].removesuffix("_C")
-        if q in (cls, short) or q.lower() == short.lower():
-            return x, short
+        if quest_matches(cls, q):
+            return x, cls.rsplit(".", 1)[-1].removesuffix("_C")
     return None, None
+
+
+def recipe_adds_quest(recipe, ops, name):
+    """A scoped recipe may explicitly create the requested missing quest."""
+    if not recipe.get("requires"):
+        return False
+    for kind, path, _, value in ops:
+        if kind != "oadd" or not isinstance(value, dict):
+            continue
+        cls = value.get("QuestClass", "")
+        if (path == ("Narrative", "NarrativeSavedQuests", ("k", "QuestClass", cls))
+                and cls and quest_matches(cls, name)):
+            return True
+    return False
 
 
 def generic_complete(rec):
@@ -81,40 +99,49 @@ def main():
     rp = a.recipe or os.path.join(RECIPES, f"{a.quest}.json")
     recipe = json.load(open(rp, encoding="utf-8")) if os.path.isfile(rp) else None
     mode = "recipe" if recipe else "generic"
+    ops = T.de_ops(recipe["slot_ops"]) if recipe else []
+    can_add_quest = bool(recipe and recipe_adds_quest(recipe, ops, a.quest))
     plan = [f"# 直接完成任务：{a.quest}", "", f"- 方式：{'配方（来自真实通关记录）' if recipe else '通用（只改任务状态）'}"]
+    pending = []
+    targets = [(tp, T.load(tp)) for tp in a.target]
     if recipe:
         plan.append(f"- 配方：{rp} — {recipe.get('note', '')}")
         # Preflight every requested slot before creating output or touching achievements.
         try:
-            for tp in a.target:
-                check_requirements(T.load(tp), recipe)
+            for tp, target in targets:
+                check_requirements(target, recipe)
         except ValueError as ex:
             ap.error(f"{tp}: {ex}")
-    if not a.dry_run:
-        os.makedirs(a.out_dir, exist_ok=True)
-
-    for tp in a.target:
-        t = T.load(tp)
-        rec, short = find_quest(t, a.quest)
-        if rec is None:
+    for tp, t in targets:
+        rec, _ = find_quest(t, a.quest)
+        if rec is None and not can_add_quest:
             msg = f"{tp}: 这个槽位里没有任务 {a.quest}（还没接到），跳过"
             print(msg); plan += ["", msg]
             continue
+        if rec is None:
+            game = t.get("PBZGameSystem", {})
+            stamp, play = game.get("DateTimeString"), game.get("HasGameTime")
+            if not isinstance(stamp, str) or not T.TS.fullmatch(stamp) or type(play) is not int or play < 0:
+                ap.error(f"{tp}: cannot add a quest without a valid save timestamp and play time")
         if mode == "recipe":
             P = T.Patcher(t, os.path.basename(tp))
-            for op in T.de_ops(recipe["slot_ops"]):
+            for op in ops:
                 P.apply(op)
+            if rec is None and any(status in ("conflict", "skip") for status, _ in P.log):
+                ap.error(f"{tp}: could not apply all operations for the missing quest")
             log = [f"[{s}] {x}" for s, x in P.log]
         else:
             log = generic_complete(rec) or ["已经是完成状态，无需修改"]
             tags = [g for g in t.get("EventPipeline", {}).get("GlobalTags", [])]
             plan += ["", f"相关线索（供解释用，未修改）：共 {len(tags)} 个全局剧情标签，请按任务相关角色名筛选查看"]
-        state = find_quest(t, a.quest)[0].get("QuestCompletion")
+        patched, _ = find_quest(t, a.quest)
+        if patched is None or (rec is None and patched.get("QuestCompletion") != "EQuestCompletion::QC_Succeded"):
+            ap.error(f"{tp}: recipe did not produce the requested completed quest")
+        state = patched.get("QuestCompletion")
         plan += ["", f"## {tp}", f"结果：{state}", ""] + [f"- {x}" for x in log]
         print(f"{tp}: {state} ({len(log)} changes)")
         if not a.dry_run:
-            open(os.path.join(a.out_dir, os.path.basename(tp)), "w", encoding="utf-8").write(
-                json.dumps(t, ensure_ascii=False, separators=(",", ":")))
+            pending.append((os.path.basename(tp), t))
 
     if a.ach_target and recipe and recipe.get("ach_ops"):
         t = T.load(a.ach_target)
@@ -124,8 +151,7 @@ def main():
         T.achievements_fix(t)
         plan += ["", "## 成就进度（本地）", ""] + [f"- [{s}] {x}" for s, x in P.log]
         if not a.dry_run:
-            open(os.path.join(a.out_dir, os.path.basename(a.ach_target)), "w", encoding="utf-8").write(
-                json.dumps(t, ensure_ascii=False, separators=(",", ":")))
+            pending.append((os.path.basename(a.ach_target), t))
 
     if mode == "generic":
         plan += ["", "注意：没有这个任务的配方，奖励道具、NPC 后续状态、剧情标签都没有补。"
@@ -134,6 +160,10 @@ def main():
     if a.dry_run:
         print(text)
     else:
+        os.makedirs(a.out_dir, exist_ok=True)
+        for name, data in pending:
+            with open(os.path.join(a.out_dir, name), "w", encoding="utf-8") as f:
+                json.dump(data, f, ensure_ascii=False, separators=(",", ":"))
         open(os.path.join(a.out_dir, "plan.md"), "w", encoding="utf-8").write(text)
         print(f"plan written to {os.path.join(a.out_dir, 'plan.md')}")
     print("下一步：pbzsave.py pack <原始存档> <out-dir> <新存档>，再用 pbzsave.py install 装回（先征得玩家同意）。")
