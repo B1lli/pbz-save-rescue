@@ -1,0 +1,34 @@
+{
+ "quest": "XiaoCui",
+ "quest_cn": "小翠",
+ "format": 2,
+ "note": "根据首周目 4-A 路线的失败档修补任务日志和白山派头带。陆解元对话、过场和铸魂效果尚未经游戏内验证。",
+ "requires": [
+  {"path":["PBZGameSystem","CycleCount"],"op":"equals","value":0},
+  {"path":["EventPipeline","GlobalTags"],"op":"contains_all","value":["dhy.力者战斗.1阶段击杀","dhy.力者战斗.2阶段击杀","dhy.Seq116处决力者.播放结束"]},
+  {"path":["Narrative","NarrativeSavedQuests",{"k":"QuestClass","v":"/Game/PBZstory/PBZQuest/Simple/XiaoCui.XiaoCui_C"},"QuestCompletion"],"op":"equals","value":"EQuestCompletion::QC_Failed"},
+  {"path":["Narrative","NarrativeSavedQuests",{"k":"QuestClass","v":"/Game/PBZstory/PBZQuest/Simple/XiaoCui.XiaoCui_C"},"CompletedBranches"],"op":"contains_all","value":["1","2","2-ex","3","4-A"]},
+  {"path":["Narrative","NarrativeSavedQuests",{"k":"QuestClass","v":"/Game/PBZstory/PBZQuest/Simple/XiaoCui.XiaoCui_C"},"QuestBranches",{"k":"BranchID","v":"1"},"BranchType"],"op":"equals","value":"EBranchType::BranchCompleted"},
+  {"path":["Narrative","NarrativeSavedQuests",{"k":"QuestClass","v":"/Game/PBZstory/PBZQuest/Simple/XiaoCui.XiaoCui_C"},"QuestBranches",{"k":"BranchID","v":"2"},"BranchType"],"op":"equals","value":"EBranchType::BranchCompleted"},
+  {"path":["Narrative","NarrativeSavedQuests",{"k":"QuestClass","v":"/Game/PBZstory/PBZQuest/Simple/XiaoCui.XiaoCui_C"},"QuestBranches",{"k":"BranchID","v":"3"},"BranchType"],"op":"equals","value":"EBranchType::BranchCompleted"},
+  {"path":["Narrative","NarrativeSavedQuests",{"k":"QuestClass","v":"/Game/PBZstory/PBZQuest/Simple/XiaoCui.XiaoCui_C"},"QuestBranches",{"k":"BranchID","v":"5"},"BranchType"],"op":"equals","value":"EBranchType::BranchLocked"},
+  {"path":["Narrative","NarrativeSavedQuests",{"k":"QuestClass","v":"/Game/PBZstory/PBZQuest/Simple/XiaoCui.XiaoCui_C"},"QuestBranches",{"k":"BranchID","v":"6"},"BranchType"],"op":"equals","value":"EBranchType::None"},
+  {"path":["Narrative","NarrativeSavedQuests",{"k":"QuestClass","v":"/Game/PBZstory/PBZQuest/Simple/XiaoCui.XiaoCui_C"},"QuestBranches",{"k":"BranchID","v":"2-ex"},"BranchType"],"op":"equals","value":"EBranchType::BranchCompleted"},
+  {"path":["Narrative","NarrativeSavedQuests",{"k":"QuestClass","v":"/Game/PBZstory/PBZQuest/Simple/XiaoCui.XiaoCui_C"},"QuestBranches",{"k":"BranchID","v":"4-A"},"BranchType"],"op":"equals","value":"EBranchType::BranchCompleted"},
+  {"path":["Narrative","NarrativeSavedQuests",{"k":"QuestClass","v":"/Game/PBZstory/PBZQuest/Simple/XiaoCui.XiaoCui_C"},"QuestBranches",{"k":"BranchID","v":"4-B"},"BranchType"],"op":"equals","value":"EBranchType::None"},
+  {"path":["Inventory","InventoryInfos","TU_11007"],"op":"absent"},
+  {"path":["Narrative","QuestGameTimes",{"k":"QuestClass","v":"/Game/PBZstory/PBZQuest/Simple/XiaoCui.XiaoCui_C"},"GameTime"],"op":"exists"}
+ ],
+ "slot_ops": [
+  ["chg",["Narrative","NarrativeSavedQuests",{"k":"QuestClass","v":"/Game/PBZstory/PBZQuest/Simple/XiaoCui.XiaoCui_C"},"QuestBranches",{"k":"BranchID","v":"5"},"BranchType"],"EBranchType::BranchLocked","EBranchType::BranchCompleted"],
+  ["chg",["Narrative","NarrativeSavedQuests",{"k":"QuestClass","v":"/Game/PBZstory/PBZQuest/Simple/XiaoCui.XiaoCui_C"},"QuestBranches",{"k":"BranchID","v":"5"},"DirtyTime"],null,{"$slot":"DateTimeString"}],
+  ["ladd",["Narrative","NarrativeSavedQuests",{"k":"QuestClass","v":"/Game/PBZstory/PBZQuest/Simple/XiaoCui.XiaoCui_C"},"CompletedBranches"],null,"5"],
+  ["chg",["Narrative","NarrativeSavedQuests",{"k":"QuestClass","v":"/Game/PBZstory/PBZQuest/Simple/XiaoCui.XiaoCui_C"},"QuestBranches",{"k":"BranchID","v":"6"},"BranchType"],"EBranchType::None","EBranchType::BranchCompleted"],
+  ["chg",["Narrative","NarrativeSavedQuests",{"k":"QuestClass","v":"/Game/PBZstory/PBZQuest/Simple/XiaoCui.XiaoCui_C"},"QuestBranches",{"k":"BranchID","v":"6"},"DirtyTime"],null,{"$slot":"DateTimeString"}],
+  ["ladd",["Narrative","NarrativeSavedQuests",{"k":"QuestClass","v":"/Game/PBZstory/PBZQuest/Simple/XiaoCui.XiaoCui_C"},"CompletedBranches"],null,"6"],
+  ["chg",["Narrative","NarrativeSavedQuests",{"k":"QuestClass","v":"/Game/PBZstory/PBZQuest/Simple/XiaoCui.XiaoCui_C"},"QuestCompletion"],"EQuestCompletion::QC_Failed","EQuestCompletion::QC_Succeded"],
+  ["chg",["Narrative","QuestGameTimes",{"k":"QuestClass","v":"/Game/PBZstory/PBZQuest/Simple/XiaoCui.XiaoCui_C"},"GameTime"],null,{"$slot":"HasGameTime"}],
+  ["set",["Inventory","InventoryInfos","TU_11007"],null,{"CurrentAmount":1,"MaxAmount":1,"FirstAddTime":{"$slot":"DateTimeString"},"DirtyTime":{"$slot":"DateTimeString"},"AcquiredCycle":0}]
+ ],
+ "ach_ops": []
+}

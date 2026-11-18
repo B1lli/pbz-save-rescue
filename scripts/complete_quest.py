@@ -62,10 +62,42 @@ def check_requirements(target, recipe):
             ok = value == check["value"]
         elif check["op"] == "contains_all":
             ok = isinstance(value, list) and all(x in value for x in check["value"])
+        elif check["op"] == "absent":
+            container = T.get(target, path[:-1])
+            ok = isinstance(container, dict) and path[-1] not in container
+        elif check["op"] == "exists":
+            ok = value is not None
         else:
             raise ValueError(f"unknown recipe requirement: {check['op']}")
         if not ok:
             raise ValueError(f"recipe does not apply: {T.pstr(path)} ({check['op']})")
+
+
+def slot_ops(target, recipe):
+    """Version 2 recipes may use the target slot's own time in a write."""
+    if recipe.get("format", 1) == 1:
+        return T.de_ops(recipe["slot_ops"])
+    if recipe["format"] != 2:
+        raise ValueError(f"unsupported recipe format: {recipe['format']}")
+    game = target.get("PBZGameSystem", {})
+
+    def resolve(value):
+        if isinstance(value, dict):
+            if set(value) == {"$slot"}:
+                field = value["$slot"]
+                result = game.get(field)
+                if field == "DateTimeString" and isinstance(result, str) and T.TS.fullmatch(result):
+                    return result
+                if field == "HasGameTime" and type(result) is int and result >= 0:
+                    return result
+                raise ValueError(f"invalid or missing slot field: {field}")
+            return {key: resolve(v) for key, v in value.items()}
+        if isinstance(value, list):
+            return [resolve(v) for v in value]
+        return value
+
+    return [(kind, path, T.get(target, path) if kind == "chg" and old is None else old,
+             resolve(new)) for kind, path, old, new in T.de_ops(recipe["slot_ops"])]
 
 
 def main():
@@ -81,13 +113,15 @@ def main():
     rp = a.recipe or os.path.join(RECIPES, f"{a.quest}.json")
     recipe = json.load(open(rp, encoding="utf-8")) if os.path.isfile(rp) else None
     mode = "recipe" if recipe else "generic"
-    plan = [f"# 直接完成任务：{a.quest}", "", f"- 方式：{'配方（来自真实通关记录）' if recipe else '通用（只改任务状态）'}"]
+    plan = [f"# 直接完成任务：{a.quest}", "", f"- 方式：{'任务配方' if recipe else '通用（只改任务状态）'}"]
     if recipe:
         plan.append(f"- 配方：{rp} — {recipe.get('note', '')}")
         # Preflight every requested slot before creating output or touching achievements.
         try:
             for tp in a.target:
-                check_requirements(T.load(tp), recipe)
+                target = T.load(tp)
+                check_requirements(target, recipe)
+                slot_ops(target, recipe)
         except ValueError as ex:
             ap.error(f"{tp}: {ex}")
     if not a.dry_run:
@@ -102,7 +136,7 @@ def main():
             continue
         if mode == "recipe":
             P = T.Patcher(t, os.path.basename(tp))
-            for op in T.de_ops(recipe["slot_ops"]):
+            for op in slot_ops(t, recipe):
                 P.apply(op)
             log = [f"[{s}] {x}" for s, x in P.log]
         else:
