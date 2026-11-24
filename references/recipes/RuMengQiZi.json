@@ -1,0 +1,167 @@
+{
+ "quest": "RuMengQiZi",
+ "quest_cn": "入梦祈子",
+ "format": 1,
+ "note": "fixed state extracted from a real in-game completion; broken save has 女织 dead and 慈母护符 but no quest record (killed the doll before accepting the quest)",
+ "requires": [
+  {
+   "path": [
+    "EventPipeline",
+    "GlobalTags"
+   ],
+   "op": "contains_all",
+   "value": [
+    "ljc.女织.死亡"
+   ]
+  },
+  {
+   "path": [
+    "Inventory",
+    "AccessoryInfos",
+    "AC_BreakRegen",
+    "CurrentLevel"
+   ],
+   "op": "equals",
+   "value": 0
+  }
+ ],
+ "slot_ops": [
+  [
+   "ladd",
+   [
+    "EventPipeline",
+    "ComponentInfoJson",
+    "PBZ_Zhengdaodaying_WP-BP_NPCSpawner_C_UAID_60CF84DCBBBEC5AE02_1705466583",
+    "EventTag"
+   ],
+   null,
+   "ljc.女织.第一次对话之后"
+  ],
+  [
+   "ladd",
+   [
+    "EventPipeline",
+    "ComponentInfoJson",
+    "PBZ_Zhengdaodaying_WP-BP_NPCSpawner_C_UAID_60CF84DCBBBEC5AE02_1705466583",
+    "EventTag"
+   ],
+   null,
+   "ljc.女织.死亡"
+  ],
+  [
+   "ladd",
+   [
+    "EventPipeline",
+    "ComponentInfoJson",
+    "PBZ_Zhengdaodaying_WP-BP_NPCSpawner_C_UAID_60CF84DCBBBEC5AE02_1705466583",
+    "EventTag"
+   ],
+   null,
+   "ljc.女织.死亡道具"
+  ],
+  [
+   "ladd",
+   [
+    "EventPipeline",
+    "GlobalTags"
+   ],
+   null,
+   "ljc.女织.第一次对话之后"
+  ],
+  [
+   "ladd",
+   [
+    "EventPipeline",
+    "GlobalTags"
+   ],
+   null,
+   "ljc.陆氏草堂.大娘亲哭声开始"
+  ],
+  [
+   "ladd",
+   [
+    "EventPipeline",
+    "GlobalTags"
+   ],
+   null,
+   "ljc.陆氏草堂.大娘亲哭声结束"
+  ],
+  [
+   "ladd",
+   [
+    "EventPipeline",
+    "GlobalTags"
+   ],
+   null,
+   "ljc.击杀.大娘亲"
+  ],
+  [
+   "ladd",
+   [
+    "EventPipeline",
+    "GlobalTags"
+   ],
+   null,
+   "ljc.女织.死亡"
+  ],
+  [
+   "ladd",
+   [
+    "EventPipeline",
+    "GlobalTags"
+   ],
+   null,
+   "ljc.女织.死亡道具"
+  ],
+  [
+   "oadd",
+   [
+    "Narrative",
+    "QuestGameTimes",
+    {
+     "k": "QuestClass",
+     "v": "/Game/PBZstory/PBZQuest/Simple/RuMengQiZi.RuMengQiZi_C"
+    }
+   ],
+   null,
+   {
+    "QuestClass": "/Game/PBZstory/PBZQuest/Simple/RuMengQiZi.RuMengQiZi_C",
+    "GameTime": 38829
+   }
+  ],
+  [
+   "oadd",
+   [
+    "Narrative",
+    "NarrativeSavedQuests",
+    {
+     "k": "QuestClass",
+     "v": "/Game/PBZstory/PBZQuest/Simple/RuMengQiZi.RuMengQiZi_C"
+    }
+   ],
+   null,
+   {
+    "QuestClass": "/Game/PBZstory/PBZQuest/Simple/RuMengQiZi.RuMengQiZi_C",
+    "QuestBranches": [
+     {
+      "BranchID": "1",
+      "BranchType": "EBranchType::BranchCompleted",
+      "DirtyTime": "2026.11.24-20.38.41"
+     },
+     {
+      "BranchID": "2",
+      "BranchType": "EBranchType::BranchCompleted",
+      "DirtyTime": "2026.11.24-20.39.51"
+     }
+    ],
+    "QuestCompletion": "EQuestCompletion::QC_Succeded",
+    "CompletedBranches": [
+     "1",
+     "2"
+    ],
+    "ReachedStateNames": []
+   }
+  ]
+ ],
+ "ach_ops": []
+}
